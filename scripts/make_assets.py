@@ -15,9 +15,9 @@ ASSETS = os.path.join(ROOT, "assets")
 FORMS = os.path.join(ASSETS, "forms")
 os.makedirs(FORMS, exist_ok=True)
 
-GOLD = "#cfa15c"
-DARK = "#0f0d10"
-CREAM = "#faf6ee"
+GOLD = "#ffffff"
+DARK = "#15224b"
+CREAM = "#c7cff0"
 
 
 def svg_wordmark(path, text, sub="", width=320, height=110):
@@ -59,9 +59,9 @@ FORMS_LIST = [
 for filename, title in FORMS_LIST:
     c = canvas.Canvas(os.path.join(FORMS, filename), pagesize=LETTER)
     width, height = LETTER
-    c.setFillColorRGB(0.05, 0.05, 0.06)
+    c.setFillColorRGB(0.082, 0.133, 0.294)
     c.rect(0, height - 90, width, 90, fill=1, stroke=0)
-    c.setFillColorRGB(0.81, 0.63, 0.36)
+    c.setFillColorRGB(1, 1, 1)
     c.setFont("Helvetica-Bold", 20)
     c.drawString(50, height - 55, "Brilliant Dance Festival")
     c.setFillColorRGB(0.1, 0.1, 0.1)

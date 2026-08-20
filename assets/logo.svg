@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="320" height="110" viewBox="0 0 320 110">
-  <rect width="320" height="110" fill="#0f0d10" rx="8"/>
-  <text x="50%" y="46%" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#cfa15c" dominant-baseline="middle">Brilliant</text>
-  <text x="50%" y="74%" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="2" fill="#faf6ee" dominant-baseline="middle">DANCE FESTIVAL</text>
+  <rect width="320" height="110" fill="#15224b" rx="8"/>
+  <text x="50%" y="46%" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#ffffff" dominant-baseline="middle">Brilliant</text>
+  <text x="50%" y="74%" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="2" fill="#c7cff0" dominant-baseline="middle">DANCE FESTIVAL</text>
 </svg>

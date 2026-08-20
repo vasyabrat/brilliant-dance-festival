@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var status = document.getElementById('form-status');
       if (status) {
         status.textContent = 'Thanks! This form is not yet connected to an email service — see the README for how to wire it up.';
-        status.style.color = '#cfa15c';
+        status.style.color = '#15224b';
       }
       form.reset();
     });

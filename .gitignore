@@ -2,3 +2,9 @@
 .vercel
 __pycache__/
 *.pyc
+
+# Admin backend — local env, secrets, generated data
+server/venv/
+server/.secret_key
+server/admin_auth.json
+data/backups/

@@ -1,0 +1,632 @@
+{
+  "campCoaches": {
+    "latin": [
+      {
+        "name": "Oleg Gorbatso",
+        "quote": ""
+      },
+      {
+        "name": "Nina Estrina",
+        "quote": ""
+      },
+      {
+        "name": "Darren Hammond & Marina Steshenko",
+        "quote": "Seeks passion, enthusiasm and personality shining through \u2014 that special spark."
+      },
+      {
+        "name": "Kiki Nyemchek",
+        "quote": "Values a strong sense of artistry and athleticism."
+      },
+      {
+        "name": "Aigars Stolcers",
+        "quote": ""
+      },
+      {
+        "name": "Maria Manusova",
+        "quote": ""
+      }
+    ],
+    "standard": [
+      {
+        "name": "Szymon Kalinowski",
+        "quote": "Emphasizes a natural look combined with the full use of fundamental principles."
+      },
+      {
+        "name": "Marek Kosaty",
+        "quote": "Focuses on technique that empowers authentic dancer expression."
+      },
+      {
+        "name": "Artem Kuklin",
+        "quote": "Prioritizes stability of the performance from beginning to end."
+      },
+      {
+        "name": "Rita Algarra-Gekhman",
+        "quote": "Seeks the best quality of movement."
+      },
+      {
+        "name": "Dennis Donskoi",
+        "quote": ""
+      }
+    ]
+  },
+  "campPricing": [
+    {
+      "amount": "$180",
+      "note": "January 9",
+      "title": "Single Day"
+    },
+    {
+      "amount": "$180",
+      "note": "January 10",
+      "title": "Single Day"
+    },
+    {
+      "amount": "$350",
+      "note": "January 9 \u2013 10",
+      "title": "Two-Day Pass"
+    }
+  ],
+  "campSchedule": [
+    {
+      "label": "Private Lessons",
+      "time": "8:45 AM \u2013 5:00 PM"
+    },
+    {
+      "label": "Lectures (4 per day)",
+      "time": "5:00 PM \u2013 7:00 PM"
+    },
+    {
+      "label": "Practice Rounds",
+      "time": "7:00 PM \u2013 9:00 PM"
+    }
+  ],
+  "contact": {
+    "email": "Dance@brilliantfestival.com",
+    "name": "Nina Estrina",
+    "phone": "267-566-4872",
+    "role": "Event Organizer"
+  },
+  "hero": {
+    "lede": "Celebrating the Next Generation of Ballroom Dance Stars. A professional-grade platform inviting talented young dancers to compete with skill, passion, and dedication.",
+    "title": "Brilliant Dance Festival"
+  },
+  "homeFeaturedJudges": [
+    {
+      "name": "Vince Bailey",
+      "quote": "",
+      "role": "Master of Ceremonies"
+    },
+    {
+      "name": "Sasha Nissengolts",
+      "quote": "Prioritizes attention to detail, preparation, fundamental understanding, and musical commitment.",
+      "role": "Judge"
+    },
+    {
+      "name": "Kiki Nyemchek",
+      "quote": "Looks for artistry, athleticism, technique, passion, and competitive spirit.",
+      "role": "Judge"
+    },
+    {
+      "name": "Jason Dai",
+      "quote": "Emphasizes attitude and dedication as paramount qualities.",
+      "role": "Judge"
+    }
+  ],
+  "homePrizes": {
+    "topStudio": [
+      [
+        "1st Place",
+        "$1,000"
+      ],
+      [
+        "2nd Place",
+        "$750"
+      ],
+      [
+        "3rd Place",
+        "$500"
+      ]
+    ],
+    "topTeacher": [
+      [
+        "1st Place",
+        "$1,000"
+      ],
+      [
+        "2nd Place",
+        "$750"
+      ],
+      [
+        "3rd Place",
+        "$500"
+      ]
+    ]
+  },
+  "homeSchedule": [
+    {
+      "label": "Registration Opens",
+      "time": "7:00 AM"
+    },
+    {
+      "label": "Ballroom Opens",
+      "time": "8:00 AM"
+    },
+    {
+      "label": "Events Begin",
+      "time": "8:30 AM"
+    }
+  ],
+  "hotel": {
+    "address": "250 Connell Dr, Berkeley Heights, NJ 07922, United States",
+    "bookUrl": "https://www.hilton.com",
+    "name": "Embassy Suites by Hilton Berkeley Heights"
+  },
+  "judgingPanel": [
+    {
+      "name": "Darina Jeleva",
+      "quote": "I look for the beauty of coordination between two bodies and within the body.",
+      "role": "Chairman"
+    },
+    {
+      "name": "Oleg Gorbatso",
+      "quote": "Values musicality, synchronization, and personality.",
+      "role": "Judge"
+    },
+    {
+      "name": "Sasha Nissengolts",
+      "quote": "Prioritizes attention to detail, preparation, fundamental understanding, and musical commitment.",
+      "role": "Judge"
+    },
+    {
+      "name": "Eric Groysman",
+      "quote": "Seeks technical accuracy combined with authentic expression.",
+      "role": "Judge"
+    },
+    {
+      "name": "Max Firestein",
+      "quote": "Values mechanics, musicality, partnering, and performance balance.",
+      "role": "Judge"
+    },
+    {
+      "name": "Liliya Furman",
+      "quote": "Emphasizes rhythm reflection, partnering skills, and classic figures.",
+      "role": "Judge"
+    },
+    {
+      "name": "Kiki Nyemchek",
+      "quote": "Looks for artistry, athleticism, technique, passion, and competitive spirit.",
+      "role": "Judge"
+    },
+    {
+      "name": "Jason Dai",
+      "quote": "Emphasizes attitude and dedication as paramount qualities.",
+      "role": "Judge"
+    },
+    {
+      "name": "Dakota Pizzi",
+      "quote": "Values posture, lines, athleticism, precision, and uniqueness.",
+      "role": "Judge"
+    },
+    {
+      "name": "Artem Kuklin",
+      "quote": "Prioritizes performance stability and clarity of body lines.",
+      "role": "Judge"
+    },
+    {
+      "name": "Yulia Samarskaya",
+      "quote": "Focuses on musicality and stability of the dancing pair.",
+      "role": "Judge"
+    },
+    {
+      "name": "Masha Kozobrod",
+      "quote": "Seeks balance between artistic and technical skills with genuine enjoyment.",
+      "role": "Judge"
+    },
+    {
+      "name": "Rita Algarra-Gekhman",
+      "quote": "Concentrates on movement quality.",
+      "role": "Judge"
+    },
+    {
+      "name": "Denys Drozdyuk",
+      "quote": "Values sincere enthusiasm, musicality, and individuality.",
+      "role": "Judge"
+    },
+    {
+      "name": "Szymon Kalinowski",
+      "quote": "Emphasizes balance between technique and expression.",
+      "role": "Judge"
+    },
+    {
+      "name": "Marek Kosaty",
+      "quote": "Technique empowers dancers to reveal their true selves.",
+      "role": "Judge"
+    },
+    {
+      "name": "Ilana Keselman",
+      "quote": "Seeks harmony of beauty, quality, and belief.",
+      "role": "Judge"
+    },
+    {
+      "name": "Darren Hammond & Marina Steshenko",
+      "quote": "Look for passion and the special spark that makes dancers unforgettable.",
+      "role": "Judges"
+    },
+    {
+      "name": "Aigars Stolcers",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "name": "Maria Manusova",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "name": "Erik Heer",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "name": "Oleksandra Vereshchak",
+      "quote": "Emphasizes posture, musicality, footwork, and weight transfer.",
+      "role": "Judge"
+    },
+    {
+      "name": "Polina Skaskiv",
+      "quote": "Values personality expressed through high-quality movement.",
+      "role": "Judge"
+    },
+    {
+      "name": "Dennis Donskoi",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "name": "Anna Oblakova",
+      "quote": "Looks for character expression, posture, footwork, and partnering skills.",
+      "role": "Judge"
+    },
+    {
+      "name": "Paul Ru",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "name": "Georgi Kanev",
+      "quote": "Comprehensive perspective on artistry, technique, leadership, femininity, and overall presentation.",
+      "role": "Judge"
+    },
+    {
+      "name": "Valeria Bushueva",
+      "quote": "Values quality and couple interaction.",
+      "role": "Judge"
+    }
+  ],
+  "missionText": "Brilliant Dance Festival recognizes young ballroom dancer talent with professionalism and respect, positioning the event as a leading competition for aspiring professionals.",
+  "officials": [
+    {
+      "name": "Vince Bailey",
+      "role": "Master of Ceremonies"
+    },
+    {
+      "name": "Michelle Friedman",
+      "role": "Music Director"
+    },
+    {
+      "name": "Nina Mayster",
+      "role": "Deck Captain"
+    },
+    {
+      "name": "Marie Robers",
+      "role": "Scrutineer"
+    },
+    {
+      "name": "Marielle Pabon",
+      "role": "Registrar"
+    }
+  ],
+  "organizers": [
+    {
+      "bio": "Focuses on creating an appreciative atmosphere for dancers and coaches.",
+      "name": "Nina Estrina",
+      "role": "Organizer"
+    }
+  ],
+  "partnerSearch": [
+    {
+      "coaches": "Denys Drozdyuk & Antonina Skobina",
+      "contact": "347-656-2617",
+      "level": "PT2/JR1 Silver Level",
+      "name": "Nika Shashkina",
+      "note": "Willing to relocate for training and competition.",
+      "studio": "DNA Dance Academy"
+    },
+    {
+      "coaches": "Denys Drozdyuk & Antonina Skobina",
+      "contact": "347-656-2617",
+      "level": "PT2/JR1 Gold/Open Gold",
+      "name": "Sophie Gugilev",
+      "note": "Open to travel, training, and short-term hosting arrangements.",
+      "studio": "DNA Dance Academy"
+    }
+  ],
+  "pillars": [
+    "Inspiration",
+    "Professional Recognition",
+    "Dedication",
+    "Commitment",
+    "Professionalism",
+    "Unique & Memorable",
+    "Fearlessness",
+    "Positive Impact"
+  ],
+  "prizeTables": [
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$1,000"
+        ],
+        [
+          "2nd Place",
+          "$750"
+        ],
+        [
+          "3rd Place",
+          "$500"
+        ]
+      ],
+      "title": "Top Teacher"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$800"
+        ],
+        [
+          "2nd Place",
+          "$500"
+        ],
+        [
+          "3rd Place",
+          "$300"
+        ]
+      ],
+      "title": "Top Studio"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$150"
+        ],
+        [
+          "2nd Place",
+          "$100"
+        ],
+        [
+          "3rd Place",
+          "$80"
+        ],
+        [
+          "4th Place",
+          "$60"
+        ],
+        [
+          "5th Place",
+          "$50"
+        ],
+        [
+          "6th Place",
+          "$40"
+        ]
+      ],
+      "title": "Fordney Foundation Championship"
+    },
+    {
+      "rows": [
+        [
+          "Award",
+          "$750"
+        ]
+      ],
+      "title": "Top Prize \u2014 Youth & U21 Latin Style Champions"
+    }
+  ],
+  "registrationForms": [
+    {
+      "href": "assets/forms/solos.pdf",
+      "name": "Solos"
+    },
+    {
+      "href": "assets/forms/amateur-couples.pdf",
+      "name": "Amateur Couples"
+    },
+    {
+      "href": "assets/forms/mixedam-teacher-student.pdf",
+      "name": "MixedAm \u2014 Teacher/Student"
+    },
+    {
+      "href": "assets/forms/smooth-rhythm.pdf",
+      "name": "Smooth/Rhythm Solos/MixedAm/Couples"
+    },
+    {
+      "href": "assets/forms/coaching-pass.pdf",
+      "name": "Coaching Pass"
+    },
+    {
+      "href": "assets/forms/partner-search.pdf",
+      "name": "Partner Search Announcement Form"
+    }
+  ],
+  "registrationPayment": {
+    "mailTo": "Brilliant Dance Festival, Bensalem, PA",
+    "payableTo": "Brilliant Dance Festival",
+    "zelle": "dance@brilliantdancefestival.com"
+  },
+  "rules": [
+    "All attendees must follow National Dance Council of America (NDCA) rules and regulations.",
+    "Participants waive claims against the NDCA, organizers, and representatives for injuries or losses.",
+    "The festival assumes no responsibility for property damage or theft.",
+    "Photography and videography rights belong to organizers; private videotaping requires permission.",
+    "All dancers must be registered with NDCA with current proof.",
+    "Minors require parental/guardian waivers.",
+    "Complete entries include forms, waivers, accounting documentation, and full payment.",
+    "Entry deadline is December 12; later submissions accepted at organizers' discretion.",
+    "Competitors must arrive 30 minutes early; events will not delay for latecomers.",
+    "Events with fewer than 3 entries may be canceled or combined; prize money reduced accordingly.",
+    "Judge decisions are final; questioning judges is prohibited.",
+    "Posted marks cannot be removed without permission.",
+    "Closed syllabus events use current NDCA element lists with potential penalties.",
+    "Competitors must maintain civil, sportsmanlike conduct.",
+    "The festival reserves the right to reject entries from previous rule violators.",
+    "Cancellation refunds (minus $100 fee) apply only through the entry deadline.",
+    "Mixed Amateur is limited to amateurs partnering outside their regular partnership; advanced amateurs can partner their student competitors.",
+    "Student/Student is restricted to adult pro/am dancers, excludes those competing at \"Open Amateur\" level, and is limited to single dances only.",
+    "Amateur Divisions include Pre-Teen, Junior, Youth, Adult, and Senior categories with age-based classifications.",
+    "Newcomer category is for first-year competitors, bronze syllabus only.",
+    "Age dancing rules: up one category for Pre-Teen/Junior/Youth; down one for Senior.",
+    "Solo Stars are single competitions without partners.",
+    "Syllabus restrictions follow NDCA guidelines; lifts are prohibited at all levels.",
+    "Costumes follow NDCA requirements by age and syllabus level.",
+    "Spectators should wear casual attire during the day, dressy for evening; no smoking in the ballroom, foyer, or changing rooms."
+  ],
+  "scheduleTracks": [
+    {
+      "items": [
+        {
+          "label": "Mixed Amateur Standard",
+          "time": "8:30\u201311:00 AM"
+        },
+        {
+          "label": "Solo Standard & Latin",
+          "time": "\u2014"
+        },
+        {
+          "label": "Standard & Latin Awards",
+          "time": "\u2014"
+        },
+        {
+          "label": "PreTeen & Junior/Youth Couples (Standard & Latin)",
+          "time": "\u2014"
+        }
+      ],
+      "title": "Morning & Afternoon"
+    },
+    {
+      "items": [
+        {
+          "label": "Mixed Amateur Standard",
+          "time": "8:30\u20139:30 AM"
+        },
+        {
+          "label": "Solo Standard",
+          "time": "9:30 AM"
+        },
+        {
+          "label": "PreTeen & Junior categories",
+          "time": "Through evening"
+        },
+        {
+          "label": "Junior/Youth/Under 21 Couples Latin",
+          "time": "Concludes 9:00 PM"
+        }
+      ],
+      "title": "Alternate Track"
+    }
+  ],
+  "site": {
+    "campDates": "January 9 - 10",
+    "eventDate": "January 11th, 2026",
+    "eventDateISO": "2026-01-11",
+    "heatListUrl": "https://www.comp-mngr.com/brilliant2026/Brilliant2026_HeatLists.htm",
+    "instagram": "https://www.instagram.com/brilliant.dance.festival",
+    "name": "Brilliant Dance Festival",
+    "scoreSheetsUrl": "http://www.comp-mngr.com/brilliant2026/Brilliant2026_ScoresheetsByPerson.htm"
+  },
+  "sponsors": [
+    {
+      "contact": "innovarxhealth.com",
+      "desc": "Healthcare",
+      "name": "InnovaRx"
+    },
+    {
+      "contact": "(215) 486-5002",
+      "desc": "Vehicle dealer",
+      "name": "Bristol Auto Mall"
+    },
+    {
+      "contact": "(215) 421-4555",
+      "desc": "Insurance services",
+      "name": "GE Insurance"
+    },
+    {
+      "contact": "215-330-4116",
+      "desc": "Services",
+      "name": "Kidology Inc"
+    },
+    {
+      "contact": "215-969-3004",
+      "desc": "Legal services",
+      "name": "Vyz Law"
+    }
+  ],
+  "vendors": [
+    {
+      "contact": "201-306-4550 \u00b7 luxbeautystudio2024@gmail.com",
+      "desc": "Beauty services",
+      "link": null,
+      "name": "Lux Beauty"
+    },
+    {
+      "contact": "Instagram",
+      "desc": "Beauty services",
+      "link": "https://instagram.com",
+      "name": "Glam By AK"
+    },
+    {
+      "contact": "Instagram",
+      "desc": "Cosmetics & beauty",
+      "link": "https://instagram.com",
+      "name": "Girls Muah"
+    },
+    {
+      "contact": "Instagram",
+      "desc": "Professional beauty services",
+      "link": "https://instagram.com",
+      "name": "Nadezda Vlasova"
+    },
+    {
+      "contact": "Instagram",
+      "desc": "Dance apparel",
+      "link": "https://instagram.com",
+      "name": "Brilliant Dance Boutique"
+    },
+    {
+      "contact": "Instagram",
+      "desc": "Event photography \u2014 booking for BDF via Google Form",
+      "link": "https://instagram.com",
+      "name": "NZM Dance Photography"
+    }
+  ],
+  "whyChooseUs": [
+    {
+      "text": "We honor young dancers with the respect they deserve, offering a professional-grade competition experience.",
+      "title": "Professional Recognition"
+    },
+    {
+      "text": "Our experienced judges provide expert feedback, ensuring fairness and high standards.",
+      "title": "Top-Tier Judges"
+    },
+    {
+      "text": "Generous prizes celebrate the dedication and achievements of every participant.",
+      "title": "Exceptional Awards"
+    },
+    {
+      "text": "A unique opportunity for rising ballroom stars to shine on a national stage.",
+      "title": "Unique Platform"
+    }
+  ]
+}

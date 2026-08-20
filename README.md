@@ -1,8 +1,15 @@
 # Brilliant Dance Festival — Website
 
-A plain, dependency-free HTML/CSS/JS rebuild of the Brilliant Dance Festival website (brilliantdancefestival.com), so it can be edited and redeployed independently of the original site.
+A dependency-free static HTML/CSS/JS rebuild of the Brilliant Dance Festival website (brilliantdancefestival.com) — matched to the live site's navy/cream ballroom theme (Playfair Display + Montserrat, pill buttons) — plus a password-protected admin dashboard so the organizer can edit every piece of content herself: event date, judges, leadership, prizes, schedule, vendors, hotel, contact info, and more.
 
-No build step, no framework, no npm install required — every page is a static `.html` file that references `/css/style.css` and `/js/main.js`. Open any `.html` file in a browser, or run a tiny local server (see below), and edit away.
+## How content works
+
+Every page is generated from **`data/content.json`** by **`scripts/build.py`**. There are two ways to edit the site:
+
+1. **Admin dashboard** (recommended) — log in at `/admin`, edit any section, click **Save & Publish**. This writes `data/content.json` and regenerates every `.html` page automatically.
+2. **Edit `data/content.json` directly**, then run `python3 scripts/build.py` to regenerate the pages.
+
+Either way, don't hand-edit the generated `.html` files — they get overwritten on the next build.
 
 ## Pages
 
@@ -21,68 +28,98 @@ No build step, no framework, no npm install required — every page is a static 
 | Registration | `registration.html` |
 | Rules & Regulations | `rules-regulations.html` |
 | 404 | `404.html` |
-
-Header, footer, and nav are repeated on every page (no templating needed to view it), but if you'd rather edit them in one place, use the generator described below.
+| **Admin dashboard** | `/admin` (served by the backend, not a static file) |
 
 ## Running it locally
+
+### Just viewing/editing the static site (no admin login needed)
 
 ```bash
 python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-or `npx serve .`
+### With the admin dashboard (recommended)
 
-## Deploying to Vercel
+The dashboard is a small Python/Flask backend (`server/app.py`) that serves the whole site **and** the `/admin` editor, and rebuilds the static pages whenever you save.
 
-This is a static site, so Vercel needs no build command:
+```bash
+cd server
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python3 app.py
+```
 
-1. Import the GitHub repo in Vercel.
-2. Framework preset: **Other**.
-3. Build command: *(leave blank)*. Output directory: *(leave blank / `.`)*.
-4. Deploy.
+Then open **http://localhost:5050**. The first time it runs, it prints a generated admin password to the terminal, e.g.:
 
-A `vercel.json` is included that pins this explicitly.
+```
+No admin password set yet — generated one for you:
+  a1B2c3D4e5
+Log in at /admin, then change it from the dashboard.
+```
 
-## Editing content
+Log in at `http://localhost:5050/admin` with that password, then change it immediately from the **Change Password** section in the sidebar. The password is stored as a hash in `server/admin_auth.json` (not committed to git).
 
-You can either:
+## What's editable from the admin dashboard
 
-- **Edit the HTML files directly.** Every page is plain HTML — find the text/section you want to change and edit it in place.
-- **Edit through the generator** (`scripts/build.py`). All page content lives there as Python data/strings; running `python3 scripts/build.py` regenerates every `.html` file from it. This is useful if you want to change something that repeats across every page (like the nav, footer, or footer link list) in one place. Either workflow is fine — they don't need to be used together.
+Every top-level section of `data/content.json` gets its own page in the dashboard sidebar:
+
+- **Event & Site Info** — event date, camp dates, Heat List / Score Sheets links, Instagram
+- **Homepage Hero** — headline and intro text
+- **Leadership / Organizers** — currently just Nina Estrina; add/remove organizers, edit name/role/bio
+- **Judging Panel** and **Homepage Featured Judges** — full add/remove/edit for every judge (name, role, quote)
+- **Officials**, **Why Choose Us**, **Values/Pillars**
+- **Homepage Schedule** and **Full Schedule** (Schedule page tracks)
+- **Homepage Prizes** and **Prizes Page** tables
+- **Camp**: daily schedule, pricing, standard/Latin coaches
+- **Partner Search**, **Vendors**, **Sponsors**, **Hotel**, **Contact Info**
+- **Registration Forms** and **Payment Info**
+- **Rules & Regulations**
+- **Advanced: Raw JSON** — a direct editor over the entire content file, for anything not covered by a dedicated section
+
+Saving always rewrites `data/content.json`, regenerates every HTML page, and the live site reflects the change immediately.
+
+## Deploying
+
+The static frontend can be hosted anywhere static files work (Vercel, Netlify, GitHub Pages, S3, etc. — see `vercel.json`). **The admin dashboard needs a persistent Node/Python-capable host**, since it writes to a local file (`data/content.json`) — this won't work on Vercel serverless functions, which have a read-only/ephemeral filesystem. Good options: Render, Railway, Fly.io, a small VPS, or just running `python3 server/app.py` on a machine you control (e.g. behind a reverse proxy with HTTPS).
+
+Environment variables the backend understands:
+
+- `PORT` — port to listen on (default `5050`)
+- `SECRET_KEY` — session signing key (auto-generated and persisted to `server/.secret_key` if not set)
+- `FLASK_DEBUG=1` — enable Flask's debug/reload mode (development only)
 
 ## About the images
 
-This project was rebuilt from inside a sandboxed environment that could read the live site's **text and structure** (via a page-fetching tool) but was **blocked from downloading its actual image files** (the sandbox's network is allow-listed to a short list of domains and the live site wasn't on it). So:
+Real photos of people (judges, coaches, organizers, dancers) aren't used — every headshot is a placeholder navy-monogram avatar generated from initials (see `avatar()` in `scripts/build.py`). Swap these for real photos any time by replacing the generated `<svg>`/`<img>` in the relevant page, or by extending `content.json` with a photo URL field and updating `build.py` to use it.
 
-- The **content, page structure, navigation, copy, prize amounts, schedule, rules, and all links** were captured faithfully from the live site.
-- **Real photos of people (judges, coaches, organizers, dancers) were not used.** Rather than guess at photo-to-person mapping and risk mislabeling someone's photo, every headshot is a placeholder gold-monogram avatar (see `avatar()` in `scripts/build.py`). Swap these for real photos in `assets/` and update the relevant page(s).
-- The **logo and the three sanctioning-body badges (NDCA, Fordney Foundation, Best of the Best Dancesport) are placeholder SVGs**, not the real artwork — replace `assets/logo.svg`, `assets/logo-ndca.svg`, `assets/logo-fordney.svg`, `assets/logo-botb.svg` with the real files (same filenames, or update the paths in `scripts/build.py` / the HTML `<img>` tags).
-- The **six registration PDFs in `assets/forms/`** are placeholder documents generated by `scripts/make_assets.py` — replace them with your real entry forms.
+The **logo and the three sanctioning-body badges** (NDCA, Fordney Foundation, Best of the Best Dancesport) are placeholder SVGs — replace `assets/logo.svg`, `assets/logo-ndca.svg`, `assets/logo-fordney.svg`, `assets/logo-botb.svg` with the real artwork (same filenames).
 
-To pull the real assets from the live site: open brilliantdancefestival.com in a browser, save each image/PDF you need (or use your browser's "Save Page As" / dev-tools network tab), and drop the files into `assets/` with matching names, or update the `<img src>` / `<a href>` paths to point at your new filenames.
+The **six registration PDFs in `assets/forms/`** are placeholders generated by `scripts/make_assets.py` — replace them with real entry forms.
 
 ## Contact form
 
-The contact form on `contact.html` is currently front-end only — it shows a confirmation message but does not send an email anywhere (see `js/main.js`). To make it functional, wire it to one of:
-
-- [Formspree](https://formspree.io) — add `action="https://formspree.io/f/yourFormId"` and `method="POST"` to the `<form id="contact-form">` tag, and remove/adjust the `preventDefault()` handler in `main.js`.
-- A Vercel serverless function (`/api/contact.js`) that emails you via an email API (Resend, SendGrid, etc.) — fits naturally since you're deploying on Vercel.
-- Netlify Forms, if you deploy there instead.
-
-## Registration / payments
-
-The original site used mailed-in paper forms + checks/Zelle, not an online checkout — that's preserved as-is on `registration.html`. If you want online payment (e.g. for camp passes), you'd add a Stripe Payment Link or similar and swap the "Buy Now" button hrefs on `camp.html`.
+The contact form on `contact.html` is currently front-end only (see `js/main.js`). Wire it to Formspree, a serverless function, or similar — see the comment in `main.js`.
 
 ## Structure
 
 ```
 .
-├── index.html, about.html, ... (13 pages)
-├── css/style.css        — all styling; CSS variables at the top control the theme
-├── js/main.js            — mobile nav toggle, active-link highlighting, contact form handler
-├── assets/                — logo, badges, favicon, registration form PDFs
-├── scripts/build.py       — regenerates all HTML from shared header/footer/content
-├── scripts/make_assets.py — regenerates placeholder logo/badge/PDF assets
+├── index.html, about.html, ... (13 pages — generated, don't hand-edit)
+├── css/style.css          — theme (navy/cream, Playfair Display + Montserrat); CSS variables at the top
+├── js/main.js              — mobile nav toggle, active-link highlighting, contact form handler
+├── assets/                  — logo, badges, favicon, registration form PDFs
+├── data/content.json        — single source of truth for all site content
+├── scripts/
+│   ├── build.py              — generates every HTML page from data/content.json
+│   └── make_assets.py        — regenerates placeholder logo/badge/PDF assets
+├── server/
+│   ├── app.py                 — Flask backend: static file serving + /admin API + auth
+│   └── requirements.txt
+├── admin/
+│   ├── index.html              — admin dashboard shell (login + app)
+│   ├── admin.css
+│   └── admin.js                 — generic JSON-driven form editor
 └── vercel.json
 ```
