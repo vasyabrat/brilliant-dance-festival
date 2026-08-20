@@ -12,10 +12,12 @@
   --color-navy: #15224b;
   --color-navy-deep: #0b1330;
   --color-navy-light: #24356e;
+  --color-teal-deep: #0b3d43;
   --color-ink: #111111;
   --color-bg: #0e1530;
   --color-bg-alt: #131c40;
   --color-surface: #17204a;
+  --gradient-navy: linear-gradient(145deg, var(--color-navy) 0%, var(--color-teal-deep) 100%);
   --color-cream: #f5f4f8;
   --color-gold: #15224b;
   --color-gold-light: #4a5b9c;
@@ -131,6 +133,12 @@ p { margin: 0 0 16px; color: var(--color-text-light); }
 .topbar .quick-links a { opacity: 0.8; }
 .topbar .quick-links a:hover { opacity: 1; }
 
+.pill-bar {
+  background: linear-gradient(223deg, var(--color-navy) 0%, var(--color-teal-deep) 100%);
+  padding: 22px 0;
+}
+.pill-bar .container { display: flex; }
+
 /* ---------- Header / nav ---------- */
 header.site-header {
   background: var(--color-white);
@@ -237,14 +245,14 @@ nav.main-nav a.active { color: var(--color-navy); border-color: var(--color-navy
   .hero .container.hero-grid { grid-template-columns: 1fr; }
   .hero-visual { min-height: 240px; border-radius: 30px; order: -1; }
 }
-.hero.small { padding: 56px 0; text-align: left; background: var(--color-navy-deep); color: var(--color-white); }
+.hero.small { padding: 56px 0; text-align: left; background: var(--gradient-navy); color: var(--color-white); }
 .hero.small h1 { color: var(--color-white); }
 .hero.small .lede { color: rgba(255,255,255,0.7); max-width: 640px; }
 .hero.small .eyebrow { color: var(--color-gold-light); }
 
 /* ---------- Section blocks ---------- */
 section { padding: 68px 0; }
-.section-alt { background: var(--color-bg); color: rgba(255,255,255,0.85); position: relative; }
+.section-alt { background: var(--gradient-navy); color: rgba(255,255,255,0.85); position: relative; }
 .section-alt h2 { color: var(--color-white); }
 .section-alt p { color: rgba(255,255,255,0.62); }
 .section-alt .eyebrow { color: var(--color-gold-light); }
@@ -277,7 +285,7 @@ section { padding: 68px 0; }
 
 /* "Why choose us" style dark cards */
 .grid-4 .card {
-  background: var(--color-navy);
+  background: var(--gradient-navy);
   color: rgba(255,255,255,0.85);
   border: none;
 }
@@ -478,7 +486,7 @@ form.site-form textarea { min-height: 140px; resize: vertical; }
 
 /* Footer */
 footer.site-footer {
-  background: var(--color-navy-deep);
+  background: linear-gradient(180deg, var(--color-navy) 0%, var(--color-teal-deep) 100%);
   color: rgba(255,255,255,0.6);
   padding: 60px 0 24px;
 }

@@ -208,7 +208,7 @@ def build_home(content):
   </div>
 </section>
 
-<div class="topbar">
+<div class="pill-bar">
   <div class="container" style="justify-content:center;gap:16px;">
     <a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="{site['heatListUrl']}" target="_blank" rel="noopener">Score Sheets</a>
     <a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="judges.html">Lineup Photos</a>
