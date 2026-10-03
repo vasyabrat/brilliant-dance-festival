@@ -68,6 +68,21 @@ def person_card(name, role="", quote=""):
     </div>"""
 
 
+def empty_note(text):
+    """Clean empty-state message for sections that are awaiting confirmed content."""
+    return f'<p class="empty-note">{text}</p>'
+
+
+def result_links(site):
+    """Heat List / Score Sheets links, only when URLs are configured."""
+    out = []
+    if site.get("heatListUrl"):
+        out.append(("Heat List", site["heatListUrl"]))
+    if site.get("scoreSheetsUrl"):
+        out.append(("Score Sheets", site["scoreSheetsUrl"]))
+    return out
+
+
 def head(site_name, title, description):
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -90,13 +105,14 @@ def header_html(content, active_href):
         cls = ' class="active"' if href == active_href else ""
         links.append(f'<li><a href="{href}"{cls}>{label}</a></li>')
     links_html = "\n          ".join(links)
+    result_html = "".join(
+        f'\n      <a href="{url}" target="_blank" rel="noopener">{label}</a>' for label, url in result_links(site)
+    )
     return f"""
 <div class="topbar">
   <div class="container">
     <span class="event-date">Tournament date: {site['eventDate']}</span>
-    <div class="quick-links">
-      <a href="{site['heatListUrl']}" target="_blank" rel="noopener">Heat List</a>
-      <a href="{site['scoreSheetsUrl']}" target="_blank" rel="noopener">Score Sheets</a>
+    <div class="quick-links">{result_html}
       <a href="registration.html">Register</a>
     </div>
   </div>
@@ -123,6 +139,9 @@ def header_html(content, active_href):
 def footer_html(content):
     site = content["site"]
     nav_items = "\n        ".join([f'<li><a href="{href}">{label}</a></li>' for label, href in NAV])
+    footer_results = "".join(
+        f'\n          <li><a href="{url}" target="_blank" rel="noopener">{label}</a></li>' for label, url in result_links(site)
+    )
     sanction = "\n        ".join(
         [f'<a href="{url}" target="_blank" rel="noopener"><img src="{logo}" alt="{name}"></a>' for name, url, logo in SANCTION_LOGOS]
     )
@@ -147,8 +166,7 @@ def footer_html(content):
         <h4>Resources</h4>
         <ul>
           <li><a href="rules-regulations.html">Rules &amp; Regulations</a></li>
-          <li><a href="{site['heatListUrl']}" target="_blank" rel="noopener">Heat List</a></li>
-          <li><a href="{site['scoreSheetsUrl']}" target="_blank" rel="noopener">Score Sheets</a></li>
+{footer_results}
           <li><a href="registration.html">Registration</a></li>
         </ul>
       </div>
@@ -157,7 +175,7 @@ def footer_html(content):
       {sanction}
     </div>
     <div class="bottom-bar">
-      <span>Copyright &copy; 2026 {site['name']}</span>
+      <span>Copyright &copy; 2027 {site['name']}</span>
       <span><a href="/admin">Admin</a></span>
     </div>
   </div>
@@ -191,6 +209,12 @@ def build_home(content):
     top_studio = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in content["homePrizes"]["topStudio"])
     top_teacher = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in content["homePrizes"]["topTeacher"])
     organizer_names = " &amp; ".join(o["name"] for o in content["organizers"]) or "the Organizers"
+    pill_results = "".join(
+        f'<a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="{url}" target="_blank" rel="noopener">{label}</a>'
+        for label, url in result_links(site) if label == "Score Sheets"
+    )
+    if not judges:
+        judges = empty_note("Judges will be announced soon.")
 
     body = f"""
 <section class="hero">
@@ -210,7 +234,7 @@ def build_home(content):
 
 <div class="pill-bar">
   <div class="container" style="justify-content:center;gap:16px;">
-    <a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="{site['heatListUrl']}" target="_blank" rel="noopener">Score Sheets</a>
+    {pill_results}
     <a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="judges.html">Lineup Photos</a>
   </div>
 </div>
@@ -325,7 +349,7 @@ def build_home(content):
   </div>
 </section>
 """
-    page("index.html", site["name"], "Home", f"{site['name']} — celebrating the next generation of ballroom dance stars. Junior ballroom competition, {site['eventDate']}.", "index.html", body, content)
+    page("index.html", site["name"], "Home", f"{site['name']} — celebrating the next generation of ballroom dance stars. Junior ballroom competition. Dance camp January 8\u20139 and competition January 10, 2027.", "index.html", body, content)
 
 
 def build_about(content):
@@ -333,6 +357,7 @@ def build_about(content):
     judges = "".join([person_card(j["name"], j["role"], j.get("quote", "")) for j in content["judgingPanel"]])
     organizers_html = "".join(person_card(o["name"], o["role"], o.get("bio", "")) for o in content["organizers"])
     organizer_names = ", ".join(o["name"] for o in content["organizers"]) or "our organizers"
+    judges = '<div class="people-grid">' + judges + '</div>' if judges else empty_note("The judging panel will be announced soon.")
     body = f"""
 <section class="hero small">
   <div class="container">
@@ -380,7 +405,7 @@ def build_about(content):
       <span class="eyebrow">Officials</span>
       <h2>Judge Profiles</h2>
     </div>
-    <div class="people-grid">{judges}</div>
+    {judges}
   </div>
 </section>
 """
@@ -399,6 +424,11 @@ def build_partner_search(content):
         <strong>Contact:</strong> {p["contact"]}</p>
         <p>{p["note"]}</p>
       </div>""" for p in content["partnerSearch"])
+    cards = '<div class="grid grid-2">' + cards + '</div>' if cards else empty_note("No partner listings yet. Check back after registration opens.")
+    form_note = (
+        '<p class="text-center" style="margin-top:40px;">Want to be listed here? Submit the <a href="registration.html">Partner Search Announcement Form</a> on the registration page.</p>'
+        if any("partner" in f["name"].lower() for f in content["registrationForms"]) else ""
+    )
     body = f"""
 <section class="hero small">
   <div class="container">
@@ -410,8 +440,8 @@ def build_partner_search(content):
 
 <section>
   <div class="container">
-    <div class="grid grid-2">{cards}</div>
-    <p class="text-center" style="margin-top:40px;">Want to be listed here? Submit the <a href="registration.html">Partner Search Announcement Form</a> on the registration page.</p>
+    {cards}
+    {form_note}
   </div>
 </section>
 """
@@ -421,8 +451,7 @@ def build_partner_search(content):
 def build_judges(content):
     site = content["site"]
     officials = "".join([person_card(o["name"], o["role"]) for o in content["officials"]])
-    judges_html = "".join([person_card(o["name"], o["role"], o.get("bio", "")) for o in content["organizers"]])
-    judges_html += "".join([person_card(j["name"], j["role"], j.get("quote", "")) for j in content["judgingPanel"]])
+    judges_html = "".join([person_card(j["name"], j["role"], j.get("quote", "")) for j in content["judgingPanel"]])
     body = f"""
 <section class="hero small">
   <div class="container">
@@ -435,14 +464,14 @@ def build_judges(content):
 <section>
   <div class="container">
     <div class="section-head"><h2>Judging Panel</h2></div>
-    <div class="people-grid">{judges_html}</div>
+    {'<div class="people-grid">' + judges_html + '</div>' if judges_html else empty_note("The judging panel will be announced soon.")}
   </div>
 </section>
 
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Officials</h2></div>
-    <div class="people-grid">{officials}</div>
+    {'<div class="people-grid">' + officials + '</div>' if officials else empty_note("Officials will be announced soon.")}
   </div>
 </section>
 """
@@ -471,14 +500,14 @@ def build_vendors(content):
 <section>
   <div class="container">
     <div class="section-head"><h2>Beauty, Styling &amp; Photography</h2></div>
-    <div class="vendor-list">{vendor_html}</div>
+    {'<div class="vendor-list">' + vendor_html + '</div>' if vendor_html else empty_note("Vendors will be announced soon.")}
   </div>
 </section>
 
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Sponsors</h2></div>
-    <div class="vendor-list">{sponsor_html}</div>
+    {'<div class="vendor-list">' + sponsor_html + '</div>' if sponsor_html else empty_note("Sponsors will be announced soon.")}
   </div>
 </section>
 """
@@ -551,6 +580,10 @@ def build_schedule(content):
           {"".join(f'<li><span>{i["label"]}</span><span class="time">{i["time"]}</span></li>' for i in t['items'])}
         </ul>
       </div>""" for t in content["scheduleTracks"])
+    heat_note = (
+        f'<p class="text-center" style="margin-top:30px;color:rgba(255,255,255,0.6);">This is a preliminary outline. Check the official <a href="{site["heatListUrl"]}" target="_blank" rel="noopener" style="color:#8fa0e0;">Heat List</a> the week of the event for exact timing.</p>'
+        if site.get("heatListUrl") and tracks else ""
+    )
     body = f"""
 <section class="hero small">
   <div class="container">
@@ -570,8 +603,8 @@ def build_schedule(content):
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Preliminary Running Order</h2></div>
-    <div class="grid grid-2">{tracks}</div>
-    <p class="text-center" style="margin-top:30px;color:rgba(255,255,255,0.6);">This is a preliminary outline. Check the official <a href="{site['heatListUrl']}" target="_blank" rel="noopener" style="color:#8fa0e0;">Heat List</a> the week of the event for exact timing.</p>
+    {'<div class="grid grid-2">' + tracks + '</div>' if tracks else empty_note("The preliminary running order will be posted closer to the event.")}
+    {heat_note}
   </div>
 </section>
 """
@@ -587,6 +620,11 @@ def build_camp(content):
         f'<div class="price-card"><h3>{p["title"]}</h3><div class="amount">{p["amount"]}</div><p>{p["note"]}</p><a class="btn btn-primary" href="registration.html">Buy Now</a></div>'
         for p in content["campPricing"]
     )
+    request_btn = (
+        '<p class="text-center" style="margin-top:26px;"><a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="registration.html">Request Specific Lessons</a></p>'
+        if content["registrationForms"] and pricing else ""
+    )
+    pricing_html = '<div class="price-cards">' + pricing + '</div>' if pricing else empty_note("Camp pricing will be announced soon.")
     body = f"""
 <section class="hero small">
   <div class="container">
@@ -606,22 +644,22 @@ def build_camp(content):
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Pricing</h2></div>
-    <div class="price-cards">{pricing}</div>
-    <p class="text-center" style="margin-top:26px;"><a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="registration.html">Request Specific Lessons</a></p>
+    {pricing_html}
+    {request_btn}
   </div>
 </section>
 
 <section>
   <div class="container">
     <div class="section-head"><h2>Standard Division Coaches</h2></div>
-    <div class="people-grid">{standard}</div>
+    {'<div class="people-grid">' + standard + '</div>' if standard else empty_note("Coaches will be announced soon.")}
   </div>
 </section>
 
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Latin Division Coaches</h2></div>
-    <div class="people-grid">{latin}</div>
+    {'<div class="people-grid">' + latin + '</div>' if latin else empty_note("Coaches will be announced soon.")}
   </div>
 </section>
 """
@@ -690,15 +728,7 @@ def build_registration(content):
     doc_list = "".join(
         f'<li><span>{f["name"]}</span><a class="dl" href="{f["href"]}" download>Download PDF</a></li>' for f in content["registrationForms"]
     )
-    body = f"""
-<section class="hero small">
-  <div class="container">
-    <span class="eyebrow">{site['eventDate']}</span>
-    <h1>Registration</h1>
-    <p class="lede">Download the form you need, complete it, and mail it in with payment.</p>
-  </div>
-</section>
-
+    payment_html = f"""
 <section>
   <div class="container">
     <div class="info-card text-center" style="max-width:640px;">
@@ -709,11 +739,25 @@ def build_registration(content):
     </div>
   </div>
 </section>
-
+""" if any(payment.get(k) for k in ("payableTo", "mailTo", "zelle")) else ""
+    forms_html = f'<ul class="doc-list">{doc_list}</ul>' if doc_list else empty_note("Registration coming soon.")
+    lede = (
+        "Download the form you need, complete it, and mail it in with payment."
+        if doc_list else "Registration for the 2027 festival will open soon."
+    )
+    body = f"""
+<section class="hero small">
+  <div class="container">
+    <span class="eyebrow">{site['eventDate']}</span>
+    <h1>Registration</h1>
+    <p class="lede">{lede}</p>
+  </div>
+</section>
+{payment_html}
 <section class="section-alt">
   <div class="container">
     <div class="section-head"><h2>Registration Forms</h2></div>
-    <ul class="doc-list">{doc_list}</ul>
+    {forms_html}
   </div>
 </section>
 """

@@ -529,3 +529,7 @@ footer.site-footer .social a { display: inline-flex; align-items: center; gap: 6
   align-items: center;
 }
 @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+
+/* Empty-state message for sections awaiting confirmed content */
+.empty-note { text-align: center; max-width: 560px; margin: 0 auto; font-size: 1rem; color: var(--color-text-light); }
+.section-alt .empty-note { color: rgba(255,255,255,0.7); }
