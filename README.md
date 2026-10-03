@@ -16,6 +16,7 @@ Either way, don't hand-edit the generated `.html` files — they get overwritten
 | Page | File |
 |---|---|
 | Home | `index.html` |
+| Competition | `competition.html` |
 | About | `about.html` |
 | Partner Search | `partner-search.html` |
 | Judges & Officials | `judges.html` |
@@ -89,6 +90,14 @@ Environment variables the backend understands:
 - `PORT` — port to listen on (default `5050`)
 - `SECRET_KEY` — session signing key (auto-generated and persisted to `server/.secret_key` if not set)
 - `FLASK_DEBUG=1` — enable Flask's debug/reload mode (development only)
+
+## 2027 redesign notes
+
+- Design tokens (navy, champagne, teal, fonts) are at the top of `css/style.css`. Display font: Cormorant Garamond; body: Inter.
+- **Dates** live in `content.json > site` (`eventDate`, `campDates`, `eventDateRange`, and the ISO fields) and feed every page, the announcement bar, and the home page Event structured data.
+- **Photos:** set `site.images.hero`, `.camp`, `.og` (paths to image files) in the admin or `content.json`; empty values render nothing. Nina's portrait is `assets/images/nina-estrina-{600,900,1200}.jpg` (referenced by `organizers[0].photo`).
+- **Logo:** `assets/logo.png` is cropped from the official registration form artwork; swap in a transparent/vector original when available.
+- Sections with unconfirmed 2027 info (lineup, vendors, prizes, hotel, camp pricing, times) are blank in `content.json` and show "to be announced" text until filled in.
 
 ## About the images
 

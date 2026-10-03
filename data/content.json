@@ -1,7 +1,7 @@
 {
   "campCoaches": {
-    "latin": [],
-    "standard": []
+    "ballroom": [],
+    "latin": []
   },
   "campPricing": [],
   "campSchedule": [
@@ -10,7 +10,7 @@
       "time": "TBA"
     },
     {
-      "label": "Lectures (4 per day)",
+      "label": "Lectures",
       "time": "TBA"
     },
     {
@@ -25,39 +25,13 @@
     "role": "Event Organizer"
   },
   "hero": {
-    "lede": "Celebrating the Next Generation of Ballroom Dance Stars. A professional-grade platform inviting talented young dancers to compete with skill, passion, and dedication.",
+    "lede": "A professional-grade ballroom and Latin competition, and a training camp, celebrating the next generation of dancers.",
     "title": "Brilliant Dance Festival"
   },
   "homeFeaturedJudges": [],
   "homePrizes": {
-    "topStudio": [
-      [
-        "1st Place",
-        "$1,000"
-      ],
-      [
-        "2nd Place",
-        "$750"
-      ],
-      [
-        "3rd Place",
-        "$500"
-      ]
-    ],
-    "topTeacher": [
-      [
-        "1st Place",
-        "$1,000"
-      ],
-      [
-        "2nd Place",
-        "$750"
-      ],
-      [
-        "3rd Place",
-        "$500"
-      ]
-    ]
+    "topStudio": [],
+    "topTeacher": []
   },
   "homeSchedule": [
     {
@@ -74,9 +48,9 @@
     }
   ],
   "hotel": {
-    "address": "250 Connell Dr, Berkeley Heights, NJ 07922, United States",
-    "bookUrl": "https://www.hilton.com",
-    "name": "Embassy Suites by Hilton Berkeley Heights"
+    "address": "",
+    "bookUrl": "",
+    "name": ""
   },
   "judgingPanel": [],
   "missionText": "Brilliant Dance Festival recognizes young ballroom dancer talent with professionalism and respect, positioning the event as a leading competition for aspiring professionals.",
@@ -85,7 +59,9 @@
     {
       "bio": "Focuses on creating an appreciative atmosphere for dancers and coaches.",
       "name": "Nina Estrina",
-      "role": "Organizer"
+      "photo": "assets/images/nina-estrina",
+      "photoAlt": "Portrait of Nina Estrina, organizer of Brilliant Dance Festival",
+      "role": "Organizer, Brilliant Dance Festival"
     }
   ],
   "partnerSearch": [],
@@ -99,90 +75,23 @@
     "Fearlessness",
     "Positive Impact"
   ],
-  "prizeTables": [
-    {
-      "rows": [
-        [
-          "1st Place",
-          "$1,000"
-        ],
-        [
-          "2nd Place",
-          "$750"
-        ],
-        [
-          "3rd Place",
-          "$500"
-        ]
-      ],
-      "title": "Top Teacher"
-    },
-    {
-      "rows": [
-        [
-          "1st Place",
-          "$800"
-        ],
-        [
-          "2nd Place",
-          "$500"
-        ],
-        [
-          "3rd Place",
-          "$300"
-        ]
-      ],
-      "title": "Top Studio"
-    },
-    {
-      "rows": [
-        [
-          "1st Place",
-          "$150"
-        ],
-        [
-          "2nd Place",
-          "$100"
-        ],
-        [
-          "3rd Place",
-          "$80"
-        ],
-        [
-          "4th Place",
-          "$60"
-        ],
-        [
-          "5th Place",
-          "$50"
-        ],
-        [
-          "6th Place",
-          "$40"
-        ]
-      ],
-      "title": "Fordney Foundation Championship"
-    },
-    {
-      "rows": [
-        [
-          "Award",
-          "$750"
-        ]
-      ],
-      "title": "Top Prize \u2014 Youth & U21 Latin Style Champions"
-    }
-  ],
+  "prizeTables": [],
   "registrationForms": [
     {
+      "detail": "Minis · TB · PT · Junior · Youth · U21",
+      "format": "PDF",
       "href": "assets/forms/solos.pdf",
       "name": "Solos"
     },
     {
+      "detail": "Minis · TB · PT · Junior · Youth · U21",
+      "format": "PDF",
       "href": "assets/forms/amateur-couples.pdf",
       "name": "Amateur Couples"
     },
     {
+      "detail": "Minis · TB · PT · Junior · Youth · U21",
+      "format": "PDF",
       "href": "assets/forms/teacher-student.pdf",
       "name": "Teacher/Student"
     }
@@ -190,6 +99,7 @@
   "registrationPayment": {
     "mailTo": "4671 Neshaminy Blvd, Bensalem, PA 19020",
     "payableTo": "Brilliant Dance Festival",
+    "submitTo": "dance@brilliantdancefestival.com",
     "zelle": "dance@brilliantdancefestival.com"
   },
   "rules": [
@@ -221,11 +131,20 @@
   ],
   "scheduleTracks": [],
   "site": {
-    "campDates": "January 8 - 9, 2027",
-    "eventDate": "January 10th, 2027",
+    "campDates": "January 8–9, 2027",
+    "campEndISO": "2027-01-09",
+    "campStartISO": "2027-01-08",
+    "eventDate": "January 10, 2027",
     "eventDateISO": "2027-01-10",
-    "eventDateRange": "January 8\u201310, 2027",
+    "eventDateRange": "January 8–10, 2027",
     "heatListUrl": "",
+    "images": {
+      "about": "",
+      "camp": "",
+      "competition": "",
+      "hero": "",
+      "og": ""
+    },
     "instagram": "https://www.instagram.com/brilliant.dance.festival",
     "name": "Brilliant Dance Festival",
     "scoreSheetsUrl": ""
@@ -234,20 +153,16 @@
   "vendors": [],
   "whyChooseUs": [
     {
-      "text": "We honor young dancers with the respect they deserve, offering a professional-grade competition experience.",
-      "title": "Professional Recognition"
+      "text": "Young dancers are treated as the future professionals they are, with respect and recognition at every stage of the event.",
+      "title": "Professional recognition"
     },
     {
-      "text": "Our experienced judges provide expert feedback, ensuring fairness and high standards.",
-      "title": "Top-Tier Judges"
+      "text": "A competition built to give rising ballroom dancers a memorable stage, with the goal of becoming the premier kids’ ballroom competition in the United States.",
+      "title": "A platform to shine"
     },
     {
-      "text": "Generous prizes celebrate the dedication and achievements of every participant.",
-      "title": "Exceptional Awards"
-    },
-    {
-      "text": "A unique opportunity for rising ballroom stars to shine on a national stage.",
-      "title": "Unique Platform"
+      "text": "Entries follow National Dance Council of America (NDCA) rules and regulations, so dancers, parents and studios know what to expect.",
+      "title": "Clear, familiar rules"
     }
   ]
 }
