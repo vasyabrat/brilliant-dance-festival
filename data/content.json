@@ -173,11 +173,24 @@
       "title": "Top Prize \u2014 Youth & U21 Latin Style Champions"
     }
   ],
-  "registrationForms": [],
+  "registrationForms": [
+    {
+      "href": "assets/forms/solos.pdf",
+      "name": "Solos"
+    },
+    {
+      "href": "assets/forms/amateur-couples.pdf",
+      "name": "Amateur Couples"
+    },
+    {
+      "href": "assets/forms/teacher-student.pdf",
+      "name": "Teacher/Student"
+    }
+  ],
   "registrationPayment": {
-    "mailTo": "",
-    "payableTo": "",
-    "zelle": ""
+    "mailTo": "4671 Neshaminy Blvd, Bensalem, PA 19020",
+    "payableTo": "Brilliant Dance Festival",
+    "zelle": "dance@brilliantdancefestival.com"
   },
   "rules": [
     "All attendees must follow National Dance Council of America (NDCA) rules and regulations.",

@@ -733,7 +733,7 @@ def build_registration(content):
   <div class="container">
     <div class="info-card text-center" style="max-width:640px;">
       <h3>Payment</h3>
-      <p>Make checks / money orders payable to: <strong>{payment['payableTo']}</strong><br>
+      <p>Make checks payable to: <strong>{payment['payableTo']}</strong><br>
       Mail to: {payment['mailTo']}</p>
       <p>Or pay via Zelle to <strong>{payment['zelle']}</strong></p>
     </div>
@@ -742,7 +742,7 @@ def build_registration(content):
 """ if any(payment.get(k) for k in ("payableTo", "mailTo", "zelle")) else ""
     forms_html = f'<ul class="doc-list">{doc_list}</ul>' if doc_list else empty_note("Registration coming soon.")
     lede = (
-        "Download the form you need, complete it, and mail it in with payment."
+        "Download the form you need, complete it, and email it in with payment."
         if doc_list else "Registration for the 2027 festival will open soon."
     )
     body = f"""
