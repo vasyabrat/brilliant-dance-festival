@@ -367,6 +367,10 @@ def build_home(content):
   <div><dt>Venue &amp; hotel</dt><dd>To be announced</dd></div>
   <div><dt>Judges &amp; officials</dt><dd>To be announced</dd></div>
 </dl>"""
+    camp_price_line = (
+        " &middot; ".join(e(p["amount"]) + " " + e(p["title"].lower()) for p in content["campPricing"]) + ". Schedule and coaching faculty will be announced."
+        if content["campPricing"] else "Pricing, schedule and coaching faculty will be announced."
+    )
     steps = (
         """<ol class="steps">
   <li><h3>Choose your category</h3><p>Pick the entry form that matches how you dance.</p></li>
@@ -407,7 +411,7 @@ def build_home(content):
   <article class="path path-camp {reveal()}">
     <p class="path-kind">Training Camp</p>
     <h3>{e(site['campDates'])}</h3>
-    <p>Two days of training ahead of the competition: private lessons, lectures and practice rounds. Pricing, schedule and coaching faculty will be announced.</p>
+    <p>Two days of training ahead of the competition: private lessons, lectures and practice rounds. {camp_price_line}</p>
     {btn('Camp information', 'camp.html', 'secondary')}
   </article>
 </div>''', "", section_head("The weekend", "Two events, one festival", "Compete on Sunday, or train with coaches on Friday and Saturday. Dancers can take part in either or both.", "overview-title"), "overview-title")}
@@ -646,7 +650,9 @@ def build_camp(content):
     camp_items = "".join(f'<li><span>{e(s["label"])}</span><span class="time">{e(s["time"])}</span></li>' for s in content["campSchedule"])
     w1, m1, n1 = day_parts(site["campStartISO"]); w2, m2, n2 = day_parts(site["campEndISO"])
     pricing = "".join(
-        f'<div class="price {reveal()}"><h3>{e(p["title"])}</h3><p class="amount">{e(p["amount"])}</p><p>{e(p["note"])}</p></div>' for p in content["campPricing"]
+        f'<div class="price {reveal()}"><h3>{e(p["title"])}</h3><p class="amount">{e(p["amount"])}</p><p>{e(p["note"])}</p>'
+        + (f'<a class="btn btn-primary" href="{e(p["href"])}" target="_blank" rel="noopener">Pay for camp<span class="sr-only"> &mdash; {e(p["title"])}, {e(p["amount"])}</span>{ARROW}</a>' if p.get("href") else "")
+        + '</div>' for p in content["campPricing"]
     )
     pricing_html = f'<div class="prices">{pricing}</div>' if pricing else tba("Camp pricing will be announced.")
     ball, latin = content["campCoaches"]["ballroom"], content["campCoaches"]["latin"]
@@ -657,8 +663,10 @@ def build_camp(content):
         )
     else:
         coaches = f'<div class="duo"><div class="panel {reveal()}"><h3 class="h3-display">Ballroom Coaches</h3>{tba("To be announced.")}</div><div class="panel {reveal()}"><h3 class="h3-display">Latin Coaches</h3>{tba("To be announced.")}</div></div>'
+    paying = any(p.get("href") for p in content["campPricing"])
     status = (
-        "Camp registration and pricing details have not been announced yet. They will be posted on this page."
+        "Camp spots are paid online: choose one day or both days in the pricing section below. Session times and coaches will be posted on this page."
+        if paying else "Camp registration and pricing details have not been announced yet. They will be posted on this page."
     )
     img = site_image(site, "camp", "Dancers at Brilliant Ballroom Training Camp")
     body = page_hero(e(site["campDates"]), "Brilliant Ballroom Training Camp",
@@ -672,12 +680,13 @@ def build_camp(content):
       <div><dt>Dates</dt><dd>{e(w1)} {e(m1)} {n1} &amp; {e(w2)} {e(m2)} {n2}, 2027</dd></div>
       <div><dt>Format</dt><dd>Private lessons, lectures and practice rounds (details to be confirmed)</dd></div>
       <div><dt>Coaches</dt><dd>To be announced</dd></div>
-      <div><dt>Registration</dt><dd>Details to be announced</dd></div>
+      <div><dt>Pricing</dt><dd>{' &middot; '.join(e(p['amount']) + ' ' + e(p['title'].lower()) for p in content['campPricing']) if content['campPricing'] else 'To be announced'}</dd></div>
+      <div><dt>Registration</dt><dd>{'Pay online below' if paying else 'Details to be announced'}</dd></div>
     </dl>
   </div>
   <div class="{reveal()}">
     <div class="notice left"><h3 class="h3-display">Registration status</h3><p>{e(status)}</p>
-      <p class="small-note">The 2027 forms currently available are for the competition. Questions about camp? <a href="contact.html">Contact the organizer</a>.</p></div>
+      {'<div class="actions">' + btn("See pricing and pay", "#price-title", "primary") + '</div>' if paying else ''}<p class="small-note">The 2027 entry forms are for the competition. Questions about camp? <a href="contact.html">Contact the organizer</a>.</p></div>
     {'<figure class="photo-slot reveal reveal-img">' + img + '</figure>' if img else ''}
   </div>
 </div>""", "", section_head("Overview", "Camp at Brilliant", "", "camp-title", "left"), "camp-title") \
@@ -763,9 +772,19 @@ def build_registration(content):
   <p>The entry forms for {e(site['eventDateRange'])} will be published here, along with submission and payment instructions. Questions in the meantime? <a href="contact.html">Contact the organizer</a>.</p>
 </div>"""
         lede = "Registration forms for 2027 are coming soon."
+    prices = content["campPricing"]
+    if any(p.get("href") for p in prices):
+        blank = ' target="_blank" rel="noopener"'
+        links = "".join(
+            "<li>" + btn("Pay %s \u2014 %s" % (p["amount"], p["title"]), p["href"], "primary", True, blank) + "</li>"
+            for p in prices if p.get("href")
+        )
+        camp_body = f'<p>Training Camp ({e(site["campDates"])}) is paid online. Choose one day or both days; details are on the <a href="camp.html">camp page</a>.</p><ul class="pay-list">{links}</ul>'
+    else:
+        camp_body = f'<p>Camp ({e(site["campDates"])}) registration details have not been announced yet. They will be posted on the <a href="camp.html">camp page</a>.</p>'
     camp_note = f"""
 <div class="notice left {reveal()}"><h2 class="h3-display">Training Camp registration</h2>
-<p>Camp ({e(site['campDates'])}) registration details have not been announced yet. They will be posted on the <a href="camp.html">camp page</a>.</p></div>"""
+{camp_body}</div>"""
     body = page_hero(e(site["eventDate"]), "Competition Registration", lede) + section(steps) \
         + section(camp_note + f'<p class="small-note center">Please review the <a href="rules-regulations.html">Rules &amp; Regulations</a> before you enter.</p>', "alt")
     page("registration.html", content, "Registration", f"Register for {site['name']} {site['eventDate']}: choose your category, complete the form, and follow the submission and payment instructions.", "registration.html", body)

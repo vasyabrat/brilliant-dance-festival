@@ -50,7 +50,7 @@
     sponsors: { name: "", desc: "", contact: "" },
     homeSchedule: { label: "", time: "" },
     campSchedule: { label: "", time: "" },
-    campPricing: { title: "", amount: "", note: "" },
+    campPricing: { title: "", amount: "", note: "", href: "" },
     registrationForms: { name: "", detail: "", format: "PDF", href: "" },
     prizeTables: { title: "", rows: [] },
     pillars: "",

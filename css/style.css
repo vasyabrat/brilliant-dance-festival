@@ -379,3 +379,8 @@ ul, ol { margin: 0; padding: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+.price .btn { margin-top: 12px; }
+.price { display: flex; flex-direction: column; align-items: flex-start; }
+.price p { color: var(--muted); }
+.pay-list { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0 0; }

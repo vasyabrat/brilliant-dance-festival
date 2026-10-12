@@ -3,7 +3,20 @@
     "ballroom": [],
     "latin": []
   },
-  "campPricing": [],
+  "campPricing": [
+    {
+      "amount": "$200",
+      "href": "https://www.brilliantdancesport.com/pay-link/d755a3ab-16a5-4d75-8d94-380efcb3584e",
+      "note": "Any one camp day: Friday, January 8 or Saturday, January 9",
+      "title": "Single Day"
+    },
+    {
+      "amount": "$380",
+      "href": "https://www.brilliantdancesport.com/pay-link/abd412b4-8f27-4927-8747-e18d640e0b2a",
+      "note": "Both camp days: January 8–9, 2027",
+      "title": "Two-Day Pass"
+    }
+  ],
   "campSchedule": [
     {
       "label": "Private Lessons",
