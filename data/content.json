@@ -1,4 +1,10 @@
 {
+  "about": {
+    "headline": "The Future of Dance Starts… HERE!",
+    "mission": "We are driven by a commitment to the next generation of ballroom dancers, offering a platform where young competitors are treated with the same professionalism and respect as their senior counterparts. Our goal is to create a competition where these young dancers feel valued in every way that matters to them: from the supportive yet competitive environment to the generous awards and the meticulous organization for a well run and stress free event.",
+    "story": "At the Brilliant Dance Festival, we don’t just celebrate young dancers—we honor them as the professionals they are soon to become. Every detail of our competition is designed to recognize the passion, skill, and dedication these young performers bring to the floor. We are committed to giving them an experience that treats them with the respect and recognition they deserve, making this event truly one-of-a-kind and unforgettable.",
+    "vision": "We aspire to make the Brilliant Dance sport Festival the premier kids’ ballroom competition in the United States, and ultimately a global event. We aim to provide a professional-grade experience that not only motivates young dancers to keep excelling but also solidifies their place in the ballroom industry."
+  },
   "campCoaches": {
     "ballroom": [],
     "latin": []
@@ -20,15 +26,33 @@
   "campSchedule": [
     {
       "label": "Private Lessons",
-      "time": "TBA"
+      "time": "8:45 AM – 5:00 PM"
     },
     {
-      "label": "Lectures",
-      "time": "TBA"
+      "label": "Lectures (four per day)",
+      "time": "5:00 – 7:00 PM"
     },
     {
       "label": "Practice Rounds",
-      "time": "TBA"
+      "time": "7:00 – 9:00 PM"
+    }
+  ],
+  "competitionSchedule": [
+    {
+      "label": "Ballroom: Mixed Amateur, Solo, and awards",
+      "time": "8:30 – 11:00 AM"
+    },
+    {
+      "label": "Latin: Mixed Amateur, Solo, and awards",
+      "time": "11:00 AM – 3:00 PM"
+    },
+    {
+      "label": "Ballroom couples: PreTeen and Junior/Youth, plus awards",
+      "time": "3:00 – 5:00 PM"
+    },
+    {
+      "label": "Latin couples: PreTeen and Junior/Youth, plus awards",
+      "time": "5:00 – 9:00 PM"
     }
   ],
   "contact": {
@@ -41,33 +65,177 @@
     "lede": "A professional-grade ballroom and Latin competition, and a training camp, celebrating the next generation of dancers.",
     "title": "Brilliant Dance Festival"
   },
-  "homeFeaturedJudges": [],
+  "homeFeaturedJudges": [
+    {
+      "joint": "",
+      "name": "Darina Jeleva",
+      "photo": "assets/images/people/darina.jpg",
+      "quote": "",
+      "role": "Chairman of Judges"
+    },
+    {
+      "joint": "",
+      "name": "Sasha Nissengolts",
+      "photo": "assets/images/people/sasha.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Eric Groysman",
+      "photo": "assets/images/people/eric.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Jason Dai",
+      "photo": "assets/images/people/jason.jpg",
+      "quote": "",
+      "role": "Judge"
+    }
+  ],
   "homePrizes": {
-    "topStudio": [],
-    "topTeacher": []
+    "topStudio": [
+      [
+        "1st Place",
+        "$800"
+      ],
+      [
+        "2nd Place",
+        "$500"
+      ],
+      [
+        "3rd Place",
+        "$300"
+      ]
+    ],
+    "topTeacher": [
+      [
+        "1st Place",
+        "$1,000"
+      ],
+      [
+        "2nd Place",
+        "$750"
+      ],
+      [
+        "3rd Place",
+        "$500"
+      ]
+    ]
   },
   "homeSchedule": [
     {
-      "label": "Registration Opens",
-      "time": "TBA"
+      "label": "Registration opens",
+      "time": "7:00 AM"
     },
     {
-      "label": "Ballroom Opens",
-      "time": "TBA"
+      "label": "Ballroom opens",
+      "time": "8:00 AM"
     },
     {
-      "label": "Events Begin",
-      "time": "TBA"
+      "label": "Competition events begin",
+      "time": "8:30 AM"
     }
   ],
   "hotel": {
-    "address": "",
+    "address": "250 Connell Dr, Berkeley Heights, NJ 07922, United States",
     "bookUrl": "",
-    "name": ""
+    "bookingStatus": "Group booking details for January 2027 are pending confirmation.",
+    "images": [
+      "assets/images/venue/embassy-suites-exterior.jpg",
+      "assets/images/venue/embassy-suites-building.jpg",
+      "assets/images/venue/embassy-suites-lobby.jpg"
+    ],
+    "name": "Embassy Suites by Hilton Berkeley Heights",
+    "pendingBookUrl": "https://www.hilton.com/en/attend-my-event/brilliant-dance-festival/"
   },
-  "judgingPanel": [],
+  "judgingPanel": [
+    {
+      "joint": "",
+      "name": "Darina Jeleva",
+      "photo": "assets/images/people/darina.jpg",
+      "quote": "",
+      "role": "Chairman of Judges"
+    },
+    {
+      "joint": "",
+      "name": "Sasha Nissengolts",
+      "photo": "assets/images/people/sasha.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Eric Groysman",
+      "photo": "assets/images/people/eric.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Jason Dai",
+      "photo": "assets/images/people/jason.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Artem Kuklin",
+      "photo": "assets/images/people/artem.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "darren-marina",
+      "name": "Darren Hammond",
+      "photo": "assets/images/people/darren-marina.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "darren-marina",
+      "name": "Marina Steshenko",
+      "photo": "assets/images/people/darren-marina.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Maria Manusova",
+      "photo": "assets/images/people/maria.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Marat Gimaev",
+      "photo": "",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Max Bulanyi",
+      "photo": "",
+      "quote": "",
+      "role": "Judge"
+    }
+  ],
   "missionText": "Brilliant Dance Festival recognizes young ballroom dancer talent with professionalism and respect, positioning the event as a leading competition for aspiring professionals.",
-  "officials": [],
+  "officials": [
+    {
+      "name": "Marie Roberts",
+      "photo": "assets/images/people/marie.jpg",
+      "role": "Scrutineer"
+    },
+    {
+      "name": "Marielle Pabon",
+      "photo": "assets/images/people/marielle.jpg",
+      "role": "Registrar"
+    }
+  ],
   "organizers": [
     {
       "bio": "Focuses on creating an appreciative atmosphere for dancers and coaches.",
@@ -88,7 +256,80 @@
     "Fearlessness",
     "Positive Impact"
   ],
-  "prizeTables": [],
+  "prizeTables": [
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$1,000"
+        ],
+        [
+          "2nd Place",
+          "$750"
+        ],
+        [
+          "3rd Place",
+          "$500"
+        ]
+      ],
+      "title": "Top Teacher"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$150"
+        ],
+        [
+          "2nd Place",
+          "$100"
+        ],
+        [
+          "3rd Place",
+          "$80"
+        ],
+        [
+          "4th Place",
+          "$60"
+        ],
+        [
+          "5th Place",
+          "$50"
+        ],
+        [
+          "6th Place",
+          "$40"
+        ]
+      ],
+      "title": "Fordney Foundation Championship"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$800"
+        ],
+        [
+          "2nd Place",
+          "$500"
+        ],
+        [
+          "3rd Place",
+          "$300"
+        ]
+      ],
+      "title": "Top Studio"
+    },
+    {
+      "rows": [
+        [
+          "Youth & U21 category Champions in Latin Style",
+          "$750"
+        ]
+      ],
+      "title": "Top Prize"
+    }
+  ],
   "registrationForms": [
     {
       "detail": "Minis · TB · PT · Junior · Youth · U21",
@@ -152,30 +393,215 @@
     "eventDateRange": "January 8–10, 2027",
     "heatListUrl": "",
     "images": {
-      "about": "",
-      "camp": "",
-      "competition": "",
-      "hero": "",
       "og": ""
     },
     "instagram": "https://www.instagram.com/brilliant.dance.festival",
     "name": "Brilliant Dance Festival",
     "scoreSheetsUrl": ""
   },
-  "sponsors": [],
-  "vendors": [],
+  "sponsors": [
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Healthcare",
+      "desc": "Healthcare",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/innovarx.jpg",
+      "name": "InnovaRx",
+      "note": "",
+      "phone": "",
+      "website": "https://innovarxhealth.com/",
+      "websiteLabel": "innovarxhealth.com"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Vehicle dealer",
+      "desc": "Vehicle dealer",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/bristol-auto-mall.jpg",
+      "name": "Bristol Auto Mall",
+      "note": "",
+      "phone": "(215) 486-5002",
+      "website": "https://www.bristolautomall.com",
+      "websiteLabel": "bristolautomall.com"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Insurance",
+      "desc": "Insurance services",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/ge-insurance.jpg",
+      "name": "GE Insurance for Life",
+      "note": "",
+      "phone": "215-421-4555",
+      "website": "http://geinsuranceforlife.com",
+      "websiteLabel": "geinsuranceforlife.com"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Children’s services",
+      "desc": "Helping children reach their developmental milestones",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/kidology.jpg",
+      "name": "Kidology Inc",
+      "note": "",
+      "phone": "215-330-4116",
+      "website": "http://kidologyinc.com",
+      "websiteLabel": "kidologyinc.com"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Pharmacy",
+      "desc": "A pharmacy built on trust, convenience, and care.",
+      "email": "info@innovarxusa.com",
+      "instagram": "",
+      "logo": "assets/images/vendors/innovarx-pharmacy.jpg",
+      "name": "InnovaRx Pharmacy",
+      "note": "Text line (732) 455-5646 · Fax (732) 399-2771",
+      "phone": "(732) 490-5216",
+      "website": "http://www.innovarx.co",
+      "websiteLabel": "innovarx.co"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Legal services",
+      "desc": "Attorneys at law",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/vyz-law.jpg",
+      "name": "Velter Yurovsky Zoftis Sokolson, LLC",
+      "note": "",
+      "phone": "215-969-3004",
+      "website": "http://vyzlaw.com",
+      "websiteLabel": "vyzlaw.com"
+    }
+  ],
+  "vendors": [
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Beauty",
+      "desc": "Beauty services",
+      "email": "Luxbeautystudio2024@gmail.com",
+      "instagram": "",
+      "logo": "assets/images/vendors/lux-beauty.jpg",
+      "name": "Lux Beauty",
+      "note": "",
+      "phone": "201-306-4550",
+      "website": "https://luxbeautystudio.squarespace.com/",
+      "websiteLabel": "Lux Beauty Studio"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Beauty",
+      "desc": "Beauty services",
+      "email": "",
+      "instagram": "https://www.instagram.com/glam_byak?igsh=Y2ptam5xZGM3eWdj",
+      "logo": "assets/images/vendors/glam-by-ak.jpg",
+      "name": "Glam By AK",
+      "note": "",
+      "phone": "",
+      "website": "",
+      "websiteLabel": ""
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Dance apparel",
+      "desc": "Dance apparel",
+      "email": "",
+      "instagram": "https://www.instagram.com/brilliantdanceboutique?igsh=MXU5eDlvanpldmI2eA==",
+      "logo": "assets/images/vendors/brilliant-dance-boutique.jpg",
+      "name": "Brilliant Dance Boutique",
+      "note": "",
+      "phone": "",
+      "website": "",
+      "websiteLabel": ""
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Beauty",
+      "desc": "Envy Image Studio — professional beauty services",
+      "email": "envyimagestudio@gmail.com",
+      "instagram": "https://www.instagram.com/envy_nadezda_vlasova?igsh=MWZ5dzIxMzZpd2R2aQ==",
+      "logo": "assets/images/vendors/nadezda-vlasova.jpg",
+      "name": "Nadezda Vlasova",
+      "note": "",
+      "phone": "+1 (347) 481-8056",
+      "website": "https://envyimagestudio.com",
+      "websiteLabel": "envyimagestudio.com"
+    },
+    {
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Beauty",
+      "desc": "Cosmetics & beauty",
+      "email": "",
+      "instagram": "https://www.instagram.com/girls_muah?igsh=MWt4cTZzdWprbzR5Ng%3D%3D&utm_source=qr",
+      "logo": "assets/images/vendors/girls-muah.jpg",
+      "name": "Girls Muah",
+      "note": "",
+      "phone": "",
+      "website": "",
+      "websiteLabel": ""
+    },
+    {
+      "bookingFormLegacy": "https://docs.google.com/forms/d/e/1FAIpQLScg28l0M-DYq9QXyOkqGqV1aq6WU-Okl8OW67Q4A4WU67OvzA/viewform",
+      "buttonLabel": "",
+      "buttonUrl": "",
+      "category": "Photography",
+      "desc": "Event photography",
+      "email": "",
+      "instagram": "https://www.instagram.com/nzm.dance.photo/",
+      "logo": "assets/images/vendors/nzm-dance-photography.jpg",
+      "name": "NZM Dance Photography",
+      "note": "Contact via Instagram for 2027 photography bookings.",
+      "phone": "",
+      "website": "",
+      "websiteLabel": ""
+    },
+    {
+      "buttonLabel": "Order Your Videos",
+      "buttonUrl": "https://dssight.com/",
+      "category": "Video Vendor",
+      "desc": "Competition videography and dance videos.",
+      "email": "",
+      "instagram": "",
+      "logo": "assets/images/vendors/ds-sight.jpg",
+      "name": "DS Sight",
+      "note": "",
+      "phone": "",
+      "website": "https://dssight.com/",
+      "websiteLabel": "dssight.com"
+    }
+  ],
   "whyChooseUs": [
     {
-      "text": "Young dancers are treated as the future professionals they are, with respect and recognition at every stage of the event.",
-      "title": "Professional recognition"
+      "text": "We honor young dancers with the respect they deserve, offering a professional-grade competition experience.",
+      "title": "Professional Recognition"
     },
     {
-      "text": "A competition built to give rising ballroom dancers a memorable stage, with the goal of becoming the premier kids’ ballroom competition in the United States.",
-      "title": "A platform to shine"
+      "text": "Our experienced judges provide expert feedback, ensuring fairness and high standards.",
+      "title": "Top-Tier Judges"
     },
     {
-      "text": "Entries follow National Dance Council of America (NDCA) rules and regulations, so dancers, parents and studios know what to expect.",
-      "title": "Clear, familiar rules"
+      "text": "Generous prizes celebrate the dedication and achievements of every participant.",
+      "title": "Exceptional Awards"
+    },
+    {
+      "text": "The festival is a unique opportunity for rising ballroom stars to shine on a national stage.",
+      "title": "Unique Platform for Young Talent"
     }
   ]
 }

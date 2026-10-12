@@ -16,6 +16,7 @@ import datetime
 import json
 import os
 from html import escape
+from urllib.parse import quote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_PATH = os.path.join(ROOT, "data", "content.json")
@@ -117,26 +118,79 @@ def site_image(site, key, alt, sizes="(min-width: 900px) 50vw, 100vw"):
     return f'<img src="{e(src)}" alt="{e(alt)}" sizes="{sizes}" loading="lazy" decoding="async">'
 
 
+def initials(name):
+    parts = [w for w in name.replace("&", " ").split() if w]
+    return "".join(w[0] for w in parts[:2]).upper()
+
+
 def person_card(p, role_default=""):
+    """One portrait card. Without a supplied photo, a clean initials tile keeps the grid even."""
     role = p.get("role") or role_default
-    photo = f'<img src="{e(p["photo"])}" alt="{e(p["name"])}" loading="lazy" decoding="async">' if p.get("photo") else ""
+    if p.get("photo"):
+        frame = f'<div class="frame"><img src="{e(p["photo"])}" alt="{e(p["name"])}" width="500" height="600" loading="lazy" decoding="async"></div>'
+    else:
+        frame = f'<div class="frame frame-initials" aria-hidden="true"><span>{e(initials(p["name"]))}</span></div>'
     quote = f'<p class="quote">&ldquo;{e(p["quote"])}&rdquo;</p>' if p.get("quote") else ""
     role_html = f'<span class="role">{e(role)}</span>' if role else ""
-    return f'<li class="person {reveal()}">{photo}<h3>{e(p["name"])}</h3>{role_html}{quote}</li>'
+    return f'<li class="person {reveal()}">{frame}<h3>{e(p["name"])}</h3>{role_html}{quote}</li>'
+
+
+def joint_card(members):
+    """Shared photograph for two people: both names shown, each counted separately."""
+    photo = members[0].get("photo", "")
+    names = " &amp; ".join(e(m["name"]) for m in members)
+    alt = " and ".join(m["name"] for m in members)
+    roles = " / ".join(dict.fromkeys(m.get("role", "") for m in members if m.get("role")))
+    if photo:
+        frame = f'<div class="frame"><img src="{e(photo)}" alt="{e(alt)}" width="500" height="600" loading="lazy" decoding="async"></div>'
+    else:
+        frame = f'<div class="frame frame-initials" aria-hidden="true"><span>{e(initials(members[0]["name"]))}</span></div>'
+    return f'<li class="person person-joint {reveal()}">{frame}<h3>{names}</h3><span class="role">{e(roles)}</span></li>'
 
 
 def people_list(people, role_default=""):
-    return '<ul class="people">' + "".join(person_card(p, role_default) for p in people) + "</ul>"
+    """Render people in order; consecutive entries sharing a `joint` key become one card."""
+    out, i = [], 0
+    while i < len(people):
+        p = people[i]
+        key = p.get("joint")
+        if key:
+            group = [q for q in people[i:] if q.get("joint") == key]
+            # only merge when they are adjacent
+            n = 0
+            while i + n < len(people) and people[i + n].get("joint") == key:
+                n += 1
+            out.append(joint_card(people[i:i + n]))
+            i += n
+        else:
+            out.append(person_card(p, role_default))
+            i += 1
+    return '<ul class="people">' + "".join(out) + "</ul>"
 
 
-def camp_art(name, w, h, cls, eager=False):
-    """Decorative transparent cutout (not a confirmed coach). Hidden from assistive tech."""
+def cutout(name, w, h, cls, eager=False):
+    """Decorative transparent cutout (not a confirmed participant). Hidden from assistive tech."""
     loading = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
     return (
-        f'<div class="camp-art {cls} {reveal()}" aria-hidden="true">'
+        f'<div class="cutout {cls} {reveal()}" aria-hidden="true">'
         f'<picture><source srcset="assets/images/{name}.webp" type="image/webp">'
         f'<img src="assets/images/{name}.png" alt="" width="{w}" height="{h}" {loading} decoding="async"></picture></div>'
     )
+
+
+RESOURCES = [("heatListUrl", "Heat Lists", "Coming soon"), ("scoreSheetsUrl", "Score Sheets", "Not yet available")]
+
+
+def resource_status(site):
+    """Heat lists / score sheets: shown as unreleased until a URL is set in content.json > site."""
+    items = ""
+    for key, label, state in RESOURCES:
+        url = site.get(key, "")
+        if url:
+            items += f'<li class="is-live"><a href="{e(url)}" target="_blank" rel="noopener">{e(label)}</a></li>'
+        else:
+            items += f'<li><span class="res-name">{e(label)}</span><span class="res-state">{e(state)}</span></li>'
+    return f'<ul class="resource-list">{items}</ul>'
 
 
 def ld_json(obj):
@@ -189,6 +243,12 @@ def header_html(content, active_href):
                 '<li><a href="%s"%s>%s</a></li>' % (c_href, ' aria-current="page"' if c_href == active_href else "", e(c_label))
                 for c_label, c_href in children
             )
+            if label == "Competition":
+                subs += "".join(
+                    f'<li><a href="{e(site[k])}" target="_blank" rel="noopener">{e(lbl)}</a></li>' if site.get(k)
+                    else f'<li class="submenu-status"><span><strong>{e(lbl)}</strong> &mdash; {e(state)}</span></li>'
+                    for k, lbl, state in RESOURCES
+                )
             items.append(
                 f'<li class="has-menu{" is-current" if current else ""}">'
                 f'<button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-{i}">{e(label)}{CHEVRON}</button>'
@@ -225,6 +285,11 @@ def header_html(content, active_href):
 def footer_html(content):
     site = content["site"]
     contact = content["contact"]
+    footer_results = "".join(
+        f'<li><a href="{e(site[k])}" target="_blank" rel="noopener">{e(lbl)}</a></li>' if site.get(k)
+        else f'<li class="footer-status"><span>{e(lbl)} &mdash; {e(state)}</span></li>'
+        for k, lbl, state in RESOURCES
+    )
     social = f'<a href="{e(site["instagram"])}" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a>' if site.get("instagram") else ""
     return f"""
 </main>
@@ -243,6 +308,7 @@ def footer_html(content):
           <li><a href="registration.html">Registration</a></li>
           <li><a href="schedule.html">Schedule</a></li>
           <li><a href="rules-regulations.html">Rules &amp; Regulations</a></li>
+          {footer_results}
         </ul>
       </nav>
       <nav aria-label="Event information">
@@ -332,23 +398,24 @@ def organizer_block(content, compact=False):
 
 def three_days(content):
     site = content["site"]
+    camp_rows = "".join(f'<li><span class="time">{e(s["time"])}</span><span>{e(s["label"])}</span></li>' for s in content["campSchedule"])
+    comp_rows = "".join(f'<li><span class="time">{e(s["time"])}</span><span>{e(s["label"])}</span></li>' for s in content["homeSchedule"])
     days = [
-        (site["campStartISO"], "Training Camp", "Day 1", "camp"),
-        (site["campEndISO"], "Training Camp", "Day 2", "camp"),
-        (site["eventDateISO"], "Competition", "Competition day", "comp"),
+        (site["campStartISO"], "Training Camp", "Day 1", "camp", camp_rows, "camp.html", "Camp details"),
+        (site["campEndISO"], "Training Camp", "Day 2", "camp", camp_rows, "camp.html", "Camp details"),
+        (site["eventDateISO"], "Competition", "Competition day", "comp", comp_rows, "schedule.html", "Full schedule"),
     ]
     cards = ""
-    for iso, kind, sub, cls in days:
+    for iso, kind, sub, cls, rows, href, link in days:
         wd, month, num = day_parts(iso)
-        href = "camp.html" if cls == "camp" else "competition.html"
         cards += f"""
     <li class="day {cls} {reveal()}">
-      <p class="day-wd">{wd}</p>
-      <p class="day-num"><span>{num}</span> {month}</p>
-      <p class="day-kind">{kind}</p>
-      <p class="day-sub">{sub}</p>
-      <p class="day-note">Times to be confirmed</p>
-      <a class="text-link" href="{href}">{'Camp details' if cls == 'camp' else 'Competition details'}{ARROW}</a>
+      <div class="day-date"><p class="day-wd">{wd}</p><p class="day-num"><span>{num}</span> {month}</p></div>
+      <div class="day-main">
+        <p class="day-kind">{kind} <span class="day-sub">&middot; {sub}</span></p>
+        <ul class="day-times">{rows}</ul>
+        <a class="text-link" href="{href}">{link}{ARROW}</a>
+      </div>
     </li>"""
     return f'<ol class="days">{cards}</ol>'
 
@@ -359,28 +426,36 @@ def three_days(content):
 def build_home(content):
     site = content["site"]
     forms = has_forms(content)
-    hero_img = site_image(site, "hero", "Dancers at Brilliant Dance Festival", "(min-width: 900px) 46vw, 100vw")
-    media = (
-        f'<figure class="hero-photo {reveal("reveal-img")}">{hero_img}</figure>' if hero_img else
-        f"""<div class="hero-year" aria-hidden="true"><span class="yr">2027</span><span class="yr-sub">January 8&ndash;10</span></div>"""
-    )
+    hotel = content["hotel"]
+    maps = "https://www.google.com/maps/search/?api=1&query=" + quote(hotel["address"])
     why = "".join(
         f'<li class="{reveal()}"><span class="num" aria-hidden="true">{i:02d}</span><div><h3>{e(w["title"])}</h3><p>{e(w["text"])}</p></div></li>'
         for i, w in enumerate(content["whyChooseUs"], 1)
+    )
+    n_judges = len(content["judgingPanel"])
+    n_off = len(content["officials"])
+    judges_fact = (
+        f'<a href="judges.html">{n_judges} judges and {n_off} officials</a>' if n_judges else "To be announced"
+    )
+    venue_fact = (
+        f'{e(hotel["name"])}<br><a href="{e(maps)}" target="_blank" rel="noopener">Directions</a> &middot; <a href="hotel.html">Venue details</a>'
+        if hotel.get("name") else "To be announced"
+    )
+    hotel_fact = (
+        e(hotel["bookingStatus"]) if (hotel.get("name") and not hotel.get("bookUrl") and hotel.get("bookingStatus"))
+        else ('<a href="hotel.html">Book the hotel</a>' if hotel.get("bookUrl") else "To be announced")
     )
     details = f"""
 <dl class="facts">
   <div><dt>Competition</dt><dd>{e(weekday(site['eventDateISO']))}, {e(site['eventDate'])}</dd></div>
   <div><dt>Training Camp</dt><dd>{e(weekday(site['campStartISO']))} &amp; {e(weekday(site['campEndISO']))}, {e(site['campDates'])}</dd></div>
+  <div><dt>Venue</dt><dd>{venue_fact}</dd></div>
+  <div><dt>Hotel booking</dt><dd>{hotel_fact}</dd></div>
   <div><dt>Entry types</dt><dd>{e(', '.join(f['name'] for f in content['registrationForms'])) if forms else 'Announced with registration'}</dd></div>
   <div><dt>Styles</dt><dd>International Ballroom, International Latin, American Smooth, American Rhythm</dd></div>
-  <div><dt>Venue &amp; hotel</dt><dd>To be announced</dd></div>
-  <div><dt>Judges &amp; officials</dt><dd>To be announced</dd></div>
+  <div><dt>Judging panel</dt><dd>{judges_fact}</dd></div>
+  <div><dt>Heat lists &amp; scores</dt><dd>Heat Lists &mdash; Coming soon<br>Score Sheets &mdash; Not yet available</dd></div>
 </dl>"""
-    camp_price_line = (
-        " &middot; ".join(e(p["amount"]) + " " + e(p["title"].lower()) for p in content["campPricing"]) + ". Schedule and coaching faculty will be announced."
-        if content["campPricing"] else "Pricing, schedule and coaching faculty will be announced."
-    )
     steps = (
         """<ol class="steps">
   <li><h3>Choose your category</h3><p>Pick the entry form that matches how you dance.</p></li>
@@ -389,8 +464,12 @@ def build_home(content):
 </ol>""" if forms else
         '<p class="tba">2027 registration forms are coming soon. Registration details will appear here as soon as they are available.</p>'
     )
+    camp_price_line = (
+        " &middot; ".join(e(p["amount"]) + " " + e(p["title"].lower()) for p in content["campPricing"]) + "."
+        if content["campPricing"] else "Pricing and schedule will be announced."
+    )
     body = f"""
-<section class="hero">
+<section class="hero hero-art">
   <div class="container hero-grid">
     <div class="hero-copy">
       <p class="eyebrow on-dark">2027 Edition</p>
@@ -406,7 +485,7 @@ def build_home(content):
         {btn('Camp Information', 'camp.html', 'ghost')}
       </div>
     </div>
-    {media}
+    {cutout("camp-couple", 765, 1000, "cutout--couple", eager=True)}
   </div>
 </section>
 
@@ -438,20 +517,31 @@ def build_home(content):
 
 {section(organizer_block(content), "", "", "organizer-title")}
 
-{section(three_days(content), "alt", section_head("Three days", "January 8&ndash;10 at a glance", "Camp runs Friday and Saturday; the competition is Sunday. Detailed times will be posted once confirmed.", "days-title"), "days-title")}
+<section class="section alt days-section" aria-labelledby="days-title">
+  <div class="container days-grid">
+    {cutout("camp-high-kick", 511, 1000, "cutout--kick")}
+    <div class="days-body">
+      {section_head("Three days", "January 8&ndash;10 at a glance", "Camp runs Friday and Saturday; the competition is Sunday. Competition scheduling is finalized during event week.", "days-title", "left")}
+      {three_days(content)}
+    </div>
+  </div>
+</section>
 
-{section(f'''
-<div class="info-split">
-  <div class="{reveal()}">
-    <h3 class="h3-display">Event details</h3>
-    {details}
+<section class="section info-section" aria-labelledby="info-title">
+  <div class="container info-grid">
+    <div class="{reveal()}">
+      <p class="eyebrow">Plan your visit</p>
+      <h2 id="info-title">Event information</h2>
+      {details}
+    </div>
+    <div class="info-reg {reveal()}">
+      <h3 class="h3-display">How registration works</h3>
+      {steps}
+      <p class="small-note">Please read the <a href="rules-regulations.html">Rules &amp; Regulations</a> before you enter.</p>
+    </div>
+    {cutout("camp-boy", 466, 700, "cutout--boy")}
   </div>
-  <div class="{reveal()}">
-    <h3 class="h3-display">How registration works</h3>
-    {steps}
-    <p class="small-note">Please read the <a href="rules-regulations.html">Rules &amp; Regulations</a> before you enter.</p>
-  </div>
-</div>''', "", section_head("Plan your visit", "Event information", "", "info-title", "left"), "info-title")}
+</section>
 
 <section class="cta-band">
   <div class="container {reveal()}">
@@ -469,7 +559,9 @@ def build_home(content):
         "startDate": site["campStartISO"],
         "endDate": site["eventDateISO"],
         "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "organizer": {"@type": "Person", "name": content["organizers"][0]["name"]} if content["organizers"] else None,
+        "location": {"@type": "Place", "name": hotel["name"], "address": hotel["address"]} if hotel.get("name") else None,
         "subEvent": [
             {"@type": "Event", "name": "Brilliant Ballroom Training Camp", "startDate": site["campStartISO"], "endDate": site["campEndISO"]},
             {"@type": "Event", "name": f"{site['name']} Competition", "startDate": site["eventDateISO"]},
@@ -477,17 +569,21 @@ def build_home(content):
     }
     event_ld = {k: v for k, v in event_ld.items() if v is not None}
     page("index.html", content, f"{site['name']} 2027 | Camp {site['campDates']} · Competition {site['eventDate']}",
-         f"{site['name']} 2027: training camp {site['campDates']} and ballroom competition {site['eventDate']}. Registration, camp and event information.",
+         f"{site['name']} 2027: Training Camp {site['campDates']} and ballroom competition {site['eventDate']} at {hotel['name'] or 'the festival venue'}. Registration, schedule and event information.",
          "index.html", body, ld_json(event_ld) + "\n")
 
 
 def build_competition(content):
     site = content["site"]
     forms = has_forms(content)
+    hotel = content["hotel"]
     cats = "".join(
         f'<li class="{reveal()}"><h3>{e(f["name"])}</h3><p>{e(f.get("detail", ""))}</p></li>' for f in content["registrationForms"]
-    ) if forms else tba("Entry categories will be listed when the 2027 registration forms are published.")
-    cats = f'<ul class="chips-list">{cats}</ul>' if forms else cats
+    )
+    cats = f'<ul class="chips-list">{cats}</ul>' if forms else tba("Entry categories will be listed when the 2027 registration forms are published.")
+    program = program_rows(content["homeSchedule"]) + program_rows(content["competitionSchedule"])
+    n_j, n_o = len(content["judgingPanel"]), len(content["officials"])
+    prize_names = ", ".join(t["title"] for t in content["prizeTables"]) if content["prizeTables"] else "To be announced"
     body = page_hero(
         e(site["eventDate"]), "Competition",
         "A professional-grade ballroom and Latin competition giving young dancers the recognition they deserve.",
@@ -498,10 +594,10 @@ def build_competition(content):
     <h3 class="h3-display">At a glance</h3>
     <dl class="facts">
       <div><dt>Date</dt><dd>{e(weekday(site['eventDateISO']))}, {e(site['eventDate'])}</dd></div>
+      <div><dt>Venue</dt><dd>{e(hotel['name']) if hotel.get('name') else 'To be announced'}{' &middot; <a href="hotel.html">Venue details</a>' if hotel.get('name') else ''}</dd></div>
       <div><dt>Styles</dt><dd>International Ballroom, International Latin, American Smooth, American Rhythm</dd></div>
       <div><dt>Age categories</dt><dd>Minis (3&ndash;5), TB (6&ndash;7), PT1 (8&ndash;9), PT2 (10&ndash;11), J1 (12&ndash;13), J2 (14&ndash;15), Youth (16&ndash;18), U21 (19&ndash;20)</dd></div>
       <div><dt>Rules</dt><dd>NDCA rules and regulations apply</dd></div>
-      <div><dt>Venue</dt><dd>To be announced</dd></div>
     </dl>
   </div>
   <div class="{reveal()}">
@@ -510,40 +606,47 @@ def build_competition(content):
     <p class="small-note">Fees, levels and dance lists are on each registration form.</p>
   </div>
 </div>""", "", section_head("Details", "What to know before you enter", "", "comp-title", "left"), "comp-title") + section(f"""
+<ul class="program program-wide {reveal()}">{program}</ul>
+<p class="small-note">Times are local venue time. This is the published program; final scheduling is posted during event week and may change with entries. <a href="schedule.html">See the full schedule</a>.</p>""",
+        "alt", section_head("Sunday, " + e(site["eventDate"]), "Competition-day program", "", "prog-title", "left"), "prog-title") + section(f"""
 <ul class="link-rows">
   <li class="{reveal()}"><a href="registration.html"><span><strong>Registration</strong><em>Forms, submission and payment</em></span>{ARROW}</a></li>
-  <li class="{reveal()}"><a href="schedule.html"><span><strong>Schedule</strong><em>Event-day structure</em></span>{ARROW}</a></li>
-  <li class="{reveal()}"><a href="judges.html"><span><strong>Judges &amp; Officials</strong><em>To be announced</em></span>{ARROW}</a></li>
-  <li class="{reveal()}"><a href="prizes.html"><span><strong>Prizes</strong><em>To be announced</em></span>{ARROW}</a></li>
+  <li class="{reveal()}"><a href="schedule.html"><span><strong>Schedule</strong><em>Camp days and competition day</em></span>{ARROW}</a></li>
+  <li class="{reveal()}"><a href="judges.html"><span><strong>Judges &amp; Officials</strong><em>{n_j} judges &middot; {n_o} officials</em></span>{ARROW}</a></li>
+  <li class="{reveal()}"><a href="prizes.html"><span><strong>Prizes</strong><em>{e(prize_names)}</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="partner-search.html"><span><strong>Partner Search</strong><em>Dancers looking for a Latin partner</em></span>{ARROW}</a></li>
-</ul>""", "alt", section_head("Explore", "More about the competition", "", "explore-title", "left"), "explore-title")
-    page("competition.html", content, "Competition", f"Brilliant Dance Festival competition, {site['eventDate']}: styles, age categories, entry types and links to registration, schedule and rules.", "competition.html", body)
+</ul>
+<div class="resource-row {reveal()}"><h3 class="h3-display">Results</h3>{resource_status(site)}</div>""", "", section_head("Explore", "More about the competition", "", "explore-title", "left"), "explore-title")
+    page("competition.html", content, "Competition", f"Brilliant Dance Festival competition, {site['eventDate']}: styles, age categories, entry types, program and links to registration, schedule and rules.", "competition.html", body)
 
 
 def build_about(content):
     site = content["site"]
+    about = content["about"]
     pillars = "".join(f"<li>{e(v)}</li>" for v in content["pillars"])
     why = "".join(
         f'<li class="{reveal()}"><span class="num" aria-hidden="true">{i:02d}</span><div><h3>{e(w["title"])}</h3><p>{e(w["text"])}</p></div></li>'
         for i, w in enumerate(content["whyChooseUs"], 1)
     )
-    body = page_hero("About", "The future of dance starts here",
-                     "We honor young dancers as future professionals, emphasizing respect and recognition throughout the entire competition experience.") \
+    preview = people_list(content["homeFeaturedJudges"]) if content["homeFeaturedJudges"] else ""
+    org = content["organizers"][0]["name"] if content["organizers"] else "our organizer"
+    body = page_hero("About", e(about["headline"]), e(about["story"])) \
         + section(organizer_block(content), "", "", "organizer-title") \
         + section(f"""
 <div class="split-text">
   <div class="{reveal()}">
     <p class="eyebrow">Mission &amp; Vision</p>
-    <h2 id="mission-title">Building the premier kids&rsquo; ballroom competition</h2>
+    <h2 id="mission-title">Our mission &amp; vision</h2>
   </div>
   <div class="{reveal()}">
-    <p class="lead">We are committed to the next generation of ballroom dancers, aiming to create the premier kids&rsquo; ballroom competition in the United States, and ultimately a global event.</p>
-    <p>{e(content['missionText'])}</p>
+    <p class="lead">{e(about['mission'])}</p>
+    <p>{e(about['vision'])}</p>
   </div>
 </div>""", "alt", "", "mission-title") \
-        + section(f'<ol class="why">{why}</ol>', "", section_head("What sets us apart", "How we run the festival", "", "apart-title", "left"), "apart-title") \
-        + section(f'<ul class="values {reveal()}">{pillars}</ul>', "alt", section_head("Values", "What we stand for", "", "values-title"), "values-title")
-    page("about.html", content, "About", f"About {site['name']}: our mission, and {content['organizers'][0]['name'] if content['organizers'] else 'our organizer'}, the organizer behind the festival.", "about.html", body)
+        + section(f'<ol class="why">{why}</ol>', "", section_head("Why choose us", "Why choose us", "A competition that celebrates young ballroom talent with professionalism, expert judges, and exceptional awards.", "apart-title", "left"), "apart-title") \
+        + (section(preview + f'<div class="actions">{btn("Meet all judges &amp; officials".replace("&amp;", "&"), "judges.html", "secondary")}</div>', "alt", section_head("Judges", "Meet our judges", "A panel of experts bringing experience, fairness, and valuable feedback to every performance.", "judges-title", "left"), "judges-title") if preview else "") \
+        + section(f'<ul class="values {reveal()}">{pillars}</ul>', "", section_head("Values", "Values we offer", "", "values-title"), "values-title")
+    page("about.html", content, "About", f"About {site['name']}: our mission and vision, and {org}, the organizer behind the festival.", "about.html", body)
 
 
 def build_partner_search(content):
@@ -563,58 +666,98 @@ def build_judges(content):
     judges, officials = content["judgingPanel"], content["officials"]
     j_html = people_list(judges) if judges else tba("The judging panel will be announced.")
     o_html = people_list(officials) if officials else tba("Officials will be announced.")
-    body = page_hero(e(site["eventDate"]), "Judges &amp; Officials", "The 2027 judging panel and officials will be published here once confirmed.") \
+    count = len(judges)
+    body = page_hero(e(site["eventDate"]), "Judges &amp; Officials",
+                     f"{count} judges and {len(officials)} officials for the {e(site['eventDate'])} competition.") \
         + section(f"""
-<div class="duo">
-  <div class="panel {reveal()}"><h2 class="h3-display">Judging panel</h2>{j_html}</div>
-  <div class="panel {reveal()}"><h2 class="h3-display">Officials</h2>{o_html}</div>
-</div>""") \
-        + section(organizer_block(content, compact=True), "alt", "", "organizer-title")
-    page("judges.html", content, "Judges & Officials", f"Judges and officials for {site['name']} 2027, to be announced.", "judges.html", body)
+<div class="roster-block">
+  <h2 class="h3-display {reveal()}">Judges</h2>
+  {j_html}
+</div>""", "") \
+        + section(f"""
+<div class="roster-block">
+  <h2 class="h3-display {reveal()}">Officials</h2>
+  {o_html}
+</div>""", "alt") \
+        + section(organizer_block(content, compact=True), "", "", "organizer-title")
+    page("judges.html", content, "Judges & Officials", f"Judges and officials for {site['name']} 2027, {site['eventDate']}.", "judges.html", body)
+
+
+def vendor_card(v):
+    logo = (
+        f'<div class="vendor-logo"><img src="{e(v["logo"])}" alt="{e(v["name"])} logo" loading="lazy" decoding="async"></div>'
+        if v.get("logo") else f'<div class="vendor-logo vendor-wordmark" aria-hidden="true"><span>{e(v["name"])}</span></div>'
+    )
+    links = []
+    if v.get("buttonLabel") and v.get("buttonUrl"):
+        links.append(f'<a class="btn btn-primary" href="{e(v["buttonUrl"])}" target="_blank" rel="noopener">{e(v["buttonLabel"])}{ARROW}</a>')
+    meta = []
+    if v.get("website") and not (v.get("buttonUrl") == v.get("website")):
+        meta.append(f'<a href="{e(v["website"])}" target="_blank" rel="noopener">{e(v.get("websiteLabel") or "Website")}</a>')
+    if v.get("instagram"):
+        meta.append(f'<a href="{e(v["instagram"])}" target="_blank" rel="noopener">Instagram</a>')
+    if v.get("phone"):
+        digits = "".join(ch for ch in v["phone"] if ch.isdigit() or ch == "+")
+        if not digits.startswith("+"):
+            digits = "+1" + digits
+        meta.append(f'<a href="tel:{e(digits)}">{e(v["phone"])}</a>')
+    if v.get("email"):
+        meta.append(f'<a href="mailto:{e(v["email"])}">{e(v["email"])}</a>')
+    meta_html = '<ul class="vendor-links">' + "".join(f"<li>{m}</li>" for m in meta) + "</ul>" if meta else ""
+    note = f'<p class="vendor-note">{e(v["note"])}</p>' if v.get("note") else ""
+    cat = f'<p class="vendor-cat">{e(v["category"])}</p>' if v.get("category") else ""
+    desc = f'<p>{e(v["desc"])}</p>' if v.get("desc") and v.get("desc") != v.get("category") else ""
+    btn_html = f'<div class="vendor-actions">{"".join(links)}</div>' if links else ""
+    return f'<li class="vendor-card {reveal()}">{logo}<div class="vendor-body">{cat}<h3>{e(v["name"])}</h3>{desc}{note}{meta_html}{btn_html}</div></li>'
 
 
 def build_vendors(content):
     site = content["site"]
-    vendors = "".join(
-        f"""<li class="vendor {reveal()}"><h3>{e(v["name"])}</h3><p>{e(v["desc"])}</p><p>{'<a href="' + e(v["link"]) + '" target="_blank" rel="noopener">' + e(v["contact"]) + '</a>' if v.get("link") else e(v["contact"])}</p></li>"""
-        for v in content["vendors"]
-    )
-    sponsors = "".join(
-        f"""<li class="vendor {reveal()}"><h3>{e(s["name"])}</h3><p>{e(s["desc"])}</p><p>{e(s["contact"])}</p></li>""" for s in content["sponsors"]
-    )
-    v_html = f'<ul class="vendor-list">{vendors}</ul>' if vendors else tba("Vendors will be announced.")
-    s_html = f'<ul class="vendor-list">{sponsors}</ul>' if sponsors else tba("Sponsors will be announced.")
+    vendors = "".join(vendor_card(v) for v in content["vendors"])
+    sponsors = "".join(vendor_card(s) for s in content["sponsors"])
+    v_html = f'<ul class="vendor-grid">{vendors}</ul>' if vendors else tba("Vendors will be announced.")
+    s_html = f'<ul class="vendor-grid">{sponsors}</ul>' if sponsors else tba("Sponsors will be announced.")
     body = page_hero(e(site["eventDate"]), "Vendors &amp; Sponsors", f"Businesses and service providers supporting {e(site['name'])}.") \
-        + section(f"""
-<div class="duo">
-  <div class="panel {reveal()}"><h2 class="h3-display">Vendors</h2>{v_html}</div>
-  <div class="panel {reveal()}"><h2 class="h3-display">Sponsors</h2>{s_html}</div>
-</div>
-<p class="small-note center">Interested in being a vendor or sponsor? <a href="contact.html">Get in touch</a>.</p>""")
+        + section(v_html, "", section_head("Vendors", "Beauty, apparel, photography &amp; video", "", "vendors-title", "left"), "vendors-title") \
+        + section(s_html, "alt", section_head("Sponsors", "Thank you to our sponsors", "", "sponsors-title", "left"), "sponsors-title") \
+        + section('<p class="small-note center">Interested in being a vendor or sponsor? <a href="contact.html">Get in touch</a>.</p>', "")
     page("vendors.html", content, "Vendors & Sponsors", f"Vendors and sponsors of {site['name']} 2027.", "vendors.html", body)
 
 
 def build_hotel(content):
     site = content["site"]
     hotel = content["hotel"]
-    if hotel.get("name"):
-        blank = ' target="_blank" rel="noopener"'
-        book = '<div class="actions">' + btn("Book the hotel", hotel["bookUrl"], "primary", True, blank) + "</div>" if hotel.get("bookUrl") else ""
-        inner = f"""
-<div class="notice {reveal()}">
-  <h2>{e(hotel['name'])}</h2>
-  <dl class="facts"><div><dt>Address</dt><dd>{e(hotel['address'])}</dd></div>
-  <div><dt>Dates</dt><dd>Camp {e(site['campDates'])} &middot; Competition {e(site['eventDate'])}</dd></div></dl>
-  {book}
-</div>"""
+    photos = "".join(
+        f'<figure class="venue-photo {reveal("reveal-img")}"><img src="{e(src)}" alt="{e(hotel["name"])}" loading="lazy" decoding="async"></figure>'
+        for src in hotel.get("images", [])
+    )
+    maps = "https://www.google.com/maps/search/?api=1&query=" + quote(hotel["address"])
+    if hotel.get("bookUrl"):
+        book = '<div class="actions">' + btn("Book the hotel", hotel["bookUrl"], "primary", True, ' target="_blank" rel="noopener"') + btn("Get directions", maps, "secondary", True, ' target="_blank" rel="noopener"') + "</div>"
+        status = ""
     else:
-        inner = f"""
-<div class="notice {reveal()}">
-  <h2>Hotel information coming soon</h2>
-  <p>The 2027 hotel and any room-block details have not been confirmed yet. They will be posted here for {e(site['eventDateRange'])}. Questions? <a href="contact.html">Contact the organizer</a>.</p>
-</div>"""
-    body = page_hero("Where to stay", "Hotel", f"Training Camp {e(site['campDates'])} &middot; Competition {e(site['eventDate'])}") + section(inner)
-    page("hotel.html", content, "Hotel", f"Hotel information for {site['name']} 2027, {site['eventDateRange']}.", "hotel.html", body)
+        book = '<div class="actions">' + btn("Get directions", maps, "primary", True, ' target="_blank" rel="noopener"') + "</div>"
+        status = f'<p class="tba">{e(hotel.get("bookingStatus") or "Group booking details are pending confirmation.")}</p>'
+    body = page_hero("Venue &amp; hotel", e(hotel["name"]),
+                     f"Training Camp {e(site['campDates'])} &middot; Competition {e(site['eventDate'])}") + section(f"""
+<div class="info-split">
+  <div class="{reveal()}">
+    <h2 class="h3-display">Event venue</h2>
+    <dl class="facts">
+      <div><dt>Venue</dt><dd>{e(hotel['name'])}</dd></div>
+      <div><dt>Address</dt><dd>{e(hotel['address'])}</dd></div>
+      <div><dt>Training Camp</dt><dd>Friday &amp; Saturday, {e(site['campDates'])}</dd></div>
+      <div><dt>Competition</dt><dd>Sunday, {e(site['eventDate'])}</dd></div>
+    </dl>
+    {book}
+  </div>
+  <div class="{reveal()}">
+    <h2 class="h3-display">Hotel booking</h2>
+    {status}
+    <p class="small-note">Questions about rooms or the venue? <a href="contact.html">Contact the organizer</a>.</p>
+  </div>
+</div>""") + (section(f'<div class="venue-photos">{photos}</div>', "alt") if photos else "")
+    page("hotel.html", content, "Venue & Hotel", f"{hotel['name']}, {hotel['address']}: venue for {site['name']} 2027, {site['eventDateRange']}.", "hotel.html", body)
 
 
 def build_prizes(content):
@@ -628,30 +771,35 @@ def build_prizes(content):
     page("prizes.html", content, "Prizes & Awards", f"Prizes and awards at {site['name']} 2027.", "prizes.html", body)
 
 
+def program_rows(items, time_key="time"):
+    return "".join(
+        f'<li><span class="time">{e(i[time_key])}</span><span>{e(i["label"])}</span></li>' for i in items
+    )
+
+
 def build_schedule(content):
     site = content["site"]
-    camp = "".join(f'<li><span>{e(s["label"])}</span><span class="time">{e(s["time"])}</span></li>' for s in content["campSchedule"])
-    comp = "".join(f'<li><span>{e(s["label"])}</span><span class="time">{e(s["time"])}</span></li>' for s in content["homeSchedule"])
-    tracks = "".join(
-        f'<div class="panel {reveal()}"><h3 class="h3-display">{e(t["title"])}</h3><ul class="time-list">' +
-        "".join(f'<li><span>{e(i["label"])}</span><span class="time">{e(i["time"])}</span></li>' for i in t["items"]) + "</ul></div>"
-        for t in content["scheduleTracks"]
-    )
-    running = f'<div class="duo">{tracks}</div>' if tracks else tba("The preliminary running order will be posted closer to the event.")
-    d = lambda iso: day_parts(iso)
-    w1, m1, n1 = d(site["campStartISO"]); w2, m2, n2 = d(site["campEndISO"]); w3, m3, n3 = d(site["eventDateISO"])
-    body = page_hero(e(site["eventDateRange"]), "Schedule", "Camp on Friday and Saturday, competition on Sunday. Times will be posted once confirmed.") + section(f"""
+    camp = program_rows(content["campSchedule"])
+    open_rows = program_rows(content["homeSchedule"])
+    blocks = program_rows(content["competitionSchedule"])
+    w1, m1, n1 = day_parts(site["campStartISO"]); w2, m2, n2 = day_parts(site["campEndISO"]); w3, m3, n3 = day_parts(site["eventDateISO"])
+    results = resource_status(site)
+    body = page_hero(e(site["eventDateRange"]), "Schedule",
+                     "Training Camp on Friday and Saturday, competition on Sunday. Final competition scheduling is published during event week and may change with entries.") + section(f"""
 <div class="timeline">
   <div class="tl-day camp {reveal()}"><div class="tl-date"><span>{w1}</span><strong>{m1} {n1}</strong></div>
-    <div class="tl-body"><h3>Training Camp &mdash; Day 1</h3><ul class="time-list">{camp}</ul></div></div>
+    <div class="tl-body"><h2>Training Camp &mdash; Day 1</h2><ul class="program">{camp}</ul></div></div>
   <div class="tl-day camp {reveal()}"><div class="tl-date"><span>{w2}</span><strong>{m2} {n2}</strong></div>
-    <div class="tl-body"><h3>Training Camp &mdash; Day 2</h3><ul class="time-list">{camp}</ul></div></div>
+    <div class="tl-body"><h2>Training Camp &mdash; Day 2</h2><ul class="program">{camp}</ul></div></div>
   <div class="tl-day comp {reveal()}"><div class="tl-date"><span>{w3}</span><strong>{m3} {n3}</strong></div>
-    <div class="tl-body"><h3>Competition</h3><ul class="time-list">{comp}</ul></div></div>
-</div>
-<p class="small-note">All times are to be confirmed and subject to change based on registration.</p>""", "", "") \
-        + section(running, "alt", section_head("Competition day", "Preliminary running order", "", "run-title", "left"), "run-title")
-    page("schedule.html", content, "Schedule", f"Schedule for {site['name']} 2027: camp {site['campDates']} and competition {site['eventDate']}.", "schedule.html", body)
+    <div class="tl-body"><h2>Competition</h2>
+      <ul class="program">{open_rows}</ul>
+      <h3 class="program-sub">Published program</h3>
+      <ul class="program">{blocks}</ul>
+      <p class="small-note">Times are local venue time. This is the provisional session program, not final heat assignments; final scheduling is posted during event week and may change based on entries.</p>
+    </div></div>
+</div>""") + section(f'<div class="resource-row {reveal()}">{results}</div>', "alt", section_head("Results", "Heat lists &amp; score sheets", "", "results-title", "left"), "results-title")
+    page("schedule.html", content, "Schedule", f"Schedule for {site['name']} 2027: Training Camp {site['campDates']} and competition {site['eventDate']}.", "schedule.html", body)
 
 
 def build_camp(content):
@@ -679,28 +827,16 @@ def build_camp(content):
         if paying else "Camp registration and pricing details have not been announced yet. They will be posted on this page."
     )
     img = site_image(site, "camp", "Dancers at Brilliant Ballroom Training Camp")
-    reg_btn = btn("Competition registration", "registration.html", "ghost") if forms else ""
-    hero = f"""
-<section class="page-hero camp-hero">
-  <div class="container camp-hero-grid">
-    <div class="camp-hero-copy">
-      <p class="eyebrow">{e(site["campDates"])}</p>
-      <h1>Brilliant Ballroom Training Camp</h1>
-      <p class="lede">Two days of training &mdash; private lessons, lectures and practice rounds &mdash; leading into the competition on {e(site["eventDate"])}.</p>
-      {'<div class="actions">' + reg_btn + '</div>' if reg_btn else ''}
-    </div>
-    {camp_art("camp-couple", 765, 1000, "camp-art--couple", eager=True)}
-  </div>
-</section>
-"""
-    body = hero \
+    body = page_hero(e(site["campDates"]), "Brilliant Ballroom Training Camp",
+                     "Two days of training &mdash; private lessons, lectures and practice rounds &mdash; leading into the competition on " + e(site["eventDate"]) + ".",
+                     btn("Competition registration", "registration.html", "ghost") if forms else "") \
         + section(f"""
 <div class="info-split">
   <div class="{reveal()}">
     <h3 class="h3-display">Camp at a glance</h3>
     <dl class="facts">
       <div><dt>Dates</dt><dd>{e(w1)} {e(m1)} {n1} &amp; {e(w2)} {e(m2)} {n2}, 2027</dd></div>
-      <div><dt>Format</dt><dd>Private lessons, lectures and practice rounds (details to be confirmed)</dd></div>
+      <div><dt>Format</dt><dd>Private lessons, lectures (four per day) and practice rounds</dd></div>
       <div><dt>Coaches</dt><dd>To be announced</dd></div>
       <div><dt>Pricing</dt><dd>{' &middot; '.join(e(p['amount']) + ' ' + e(p['title'].lower()) for p in content['campPricing']) if content['campPricing'] else 'To be announced'}</dd></div>
       <div><dt>Registration</dt><dd>{'Pay online below' if paying else 'Details to be announced'}</dd></div>
@@ -712,32 +848,13 @@ def build_camp(content):
     {'<figure class="photo-slot reveal reveal-img">' + img + '</figure>' if img else ''}
   </div>
 </div>""", "", section_head("Overview", "Camp at Brilliant", "", "camp-title", "left"), "camp-title") \
-        + f"""
-<section class="section alt camp-days" aria-labelledby="campdays-title">
-  <div class="container camp-days-grid">
-    {camp_art("camp-high-kick", 511, 1000, "camp-art--kick")}
-    <div class="camp-days-body">
-      {section_head("Schedule", "Two days of training", "", "campdays-title", "left")}
-      <div class="duo">
-        <div class="panel {reveal()}"><h3 class="h3-display">{w1}, {m1} {n1}</h3><p class="day-sub">Training Camp &mdash; Day 1</p><ul class="time-list">{camp_items}</ul></div>
-        <div class="panel {reveal()}"><h3 class="h3-display">{w2}, {m2} {n2}</h3><p class="day-sub">Training Camp &mdash; Day 2</p><ul class="time-list">{camp_items}</ul></div>
-      </div>
-      <p class="small-note">Session details and times are to be confirmed for 2027.</p>
-    </div>
-  </div>
-</section>
-""" \
-        + f"""
-<section class="section camp-pricing" aria-labelledby="price-title">
-  <div class="container camp-pricing-grid">
-    <div class="camp-pricing-body">
-      {section_head("Pricing", "Camp pricing", "", "price-title", "left")}
-      {pricing_html}
-    </div>
-    {camp_art("camp-boy", 466, 700, "camp-art--boy")}
-  </div>
-</section>
-""" \
+        + section(f"""
+<div class="duo">
+  <div class="panel {reveal()}"><h3 class="h3-display">{w1}, {m1} {n1}</h3><p class="day-sub">Training Camp &mdash; Day 1</p><ul class="time-list">{camp_items}</ul></div>
+  <div class="panel {reveal()}"><h3 class="h3-display">{w2}, {m2} {n2}</h3><p class="day-sub">Training Camp &mdash; Day 2</p><ul class="time-list">{camp_items}</ul></div>
+</div>
+<p class="small-note">Published daily program, repeated on both camp days. Lesson availability and coaching assignments will be announced.</p>""", "alt", section_head("Schedule", "Two days of training", "", "campdays-title", "left"), "campdays-title") \
+        + section(pricing_html, "", section_head("Pricing", "Camp pricing", "", "price-title", "left"), "price-title") \
         + section(coaches, "alt", section_head("Faculty", "Coaches", "", "coach-title", "left"), "coach-title")
     page("camp.html", content, "Brilliant Ballroom Training Camp", f"Brilliant Ballroom Training Camp, {site['campDates']}: two days of training ahead of the {site['eventDate']} competition.", "camp.html", body)
 

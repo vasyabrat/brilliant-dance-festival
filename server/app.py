@@ -206,7 +206,7 @@ def put_content():
         "vendors", "sponsors", "hotel", "contact", "homeSchedule",
         "scheduleTracks", "homePrizes", "prizeTables", "campSchedule",
         "campPricing", "campCoaches", "registrationForms",
-        "registrationPayment", "rules",
+        "registrationPayment", "rules", "competitionSchedule", "about",
     }
     missing = required_top_level - set(new_content.keys())
     if missing:
