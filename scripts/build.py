@@ -129,6 +129,16 @@ def people_list(people, role_default=""):
     return '<ul class="people">' + "".join(person_card(p, role_default) for p in people) + "</ul>"
 
 
+def camp_art(name, w, h, cls, eager=False):
+    """Decorative transparent cutout (not a confirmed coach). Hidden from assistive tech."""
+    loading = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
+    return (
+        f'<div class="camp-art {cls} {reveal()}" aria-hidden="true">'
+        f'<picture><source srcset="assets/images/{name}.webp" type="image/webp">'
+        f'<img src="assets/images/{name}.png" alt="" width="{w}" height="{h}" {loading} decoding="async"></picture></div>'
+    )
+
+
 def ld_json(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + "</script>"
 
@@ -669,9 +679,21 @@ def build_camp(content):
         if paying else "Camp registration and pricing details have not been announced yet. They will be posted on this page."
     )
     img = site_image(site, "camp", "Dancers at Brilliant Ballroom Training Camp")
-    body = page_hero(e(site["campDates"]), "Brilliant Ballroom Training Camp",
-                     "Two days of training &mdash; private lessons, lectures and practice rounds &mdash; leading into the competition on " + e(site["eventDate"]) + ".",
-                     btn("Competition registration", "registration.html", "ghost") if forms else "") \
+    reg_btn = btn("Competition registration", "registration.html", "ghost") if forms else ""
+    hero = f"""
+<section class="page-hero camp-hero">
+  <div class="container camp-hero-grid">
+    <div class="camp-hero-copy">
+      <p class="eyebrow">{e(site["campDates"])}</p>
+      <h1>Brilliant Ballroom Training Camp</h1>
+      <p class="lede">Two days of training &mdash; private lessons, lectures and practice rounds &mdash; leading into the competition on {e(site["eventDate"])}.</p>
+      {'<div class="actions">' + reg_btn + '</div>' if reg_btn else ''}
+    </div>
+    {camp_art("camp-couple", 765, 1000, "camp-art--couple", eager=True)}
+  </div>
+</section>
+"""
+    body = hero \
         + section(f"""
 <div class="info-split">
   <div class="{reveal()}">
@@ -690,13 +712,32 @@ def build_camp(content):
     {'<figure class="photo-slot reveal reveal-img">' + img + '</figure>' if img else ''}
   </div>
 </div>""", "", section_head("Overview", "Camp at Brilliant", "", "camp-title", "left"), "camp-title") \
-        + section(f"""
-<div class="duo">
-  <div class="panel {reveal()}"><h3 class="h3-display">{w1}, {m1} {n1}</h3><p class="day-sub">Training Camp &mdash; Day 1</p><ul class="time-list">{camp_items}</ul></div>
-  <div class="panel {reveal()}"><h3 class="h3-display">{w2}, {m2} {n2}</h3><p class="day-sub">Training Camp &mdash; Day 2</p><ul class="time-list">{camp_items}</ul></div>
-</div>
-<p class="small-note">Session details and times are to be confirmed for 2027.</p>""", "alt", section_head("Schedule", "Two days of training", "", "campdays-title", "left"), "campdays-title") \
-        + section(pricing_html, "", section_head("Pricing", "Camp pricing", "", "price-title", "left"), "price-title") \
+        + f"""
+<section class="section alt camp-days" aria-labelledby="campdays-title">
+  <div class="container camp-days-grid">
+    {camp_art("camp-high-kick", 511, 1000, "camp-art--kick")}
+    <div class="camp-days-body">
+      {section_head("Schedule", "Two days of training", "", "campdays-title", "left")}
+      <div class="duo">
+        <div class="panel {reveal()}"><h3 class="h3-display">{w1}, {m1} {n1}</h3><p class="day-sub">Training Camp &mdash; Day 1</p><ul class="time-list">{camp_items}</ul></div>
+        <div class="panel {reveal()}"><h3 class="h3-display">{w2}, {m2} {n2}</h3><p class="day-sub">Training Camp &mdash; Day 2</p><ul class="time-list">{camp_items}</ul></div>
+      </div>
+      <p class="small-note">Session details and times are to be confirmed for 2027.</p>
+    </div>
+  </div>
+</section>
+""" \
+        + f"""
+<section class="section camp-pricing" aria-labelledby="price-title">
+  <div class="container camp-pricing-grid">
+    <div class="camp-pricing-body">
+      {section_head("Pricing", "Camp pricing", "", "price-title", "left")}
+      {pricing_html}
+    </div>
+    {camp_art("camp-boy", 466, 700, "camp-art--boy")}
+  </div>
+</section>
+""" \
         + section(coaches, "alt", section_head("Faculty", "Coaches", "", "coach-title", "left"), "coach-title")
     page("camp.html", content, "Brilliant Ballroom Training Camp", f"Brilliant Ballroom Training Camp, {site['campDates']}: two days of training ahead of the {site['eventDate']} competition.", "camp.html", body)
 
