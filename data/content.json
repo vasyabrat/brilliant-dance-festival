@@ -56,7 +56,7 @@
     }
   ],
   "contact": {
-    "email": "Dance@brilliantfestival.com",
+    "email": "Dance@brilliantdancefestival.com",
     "name": "Nina Estrina",
     "phone": "267-566-4872",
     "role": "Event Organizer"
@@ -353,8 +353,8 @@
   "registrationPayment": {
     "mailTo": "4671 Neshaminy Blvd, Bensalem, PA 19020",
     "payableTo": "Brilliant Dance Festival",
-    "submitTo": "dance@brilliantdancefestival.com",
-    "zelle": "dance@brilliantdancefestival.com"
+    "submitTo": "Dance@brilliantdancefestival.com",
+    "zelle": "Dance@brilliantdancefestival.com"
   },
   "rules": [
     "All attendees must follow National Dance Council of America (NDCA) rules and regulations.",
