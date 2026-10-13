@@ -814,13 +814,21 @@ def build_camp(content):
     )
     pricing_html = f'<div class="prices">{pricing}</div>' if pricing else tba("Camp pricing will be announced.")
     ball, latin = content["campCoaches"]["ballroom"], content["campCoaches"]["latin"]
+    faculty = content["campCoaches"].get("faculty", [])
+    parts = []
+    if faculty:
+        parts.append(f'<div class="roster-block"><h3 class="h3-display {reveal()}">Camp coaches</h3>{people_list(faculty, "Camp Coach")}</div>')
     if ball or latin:
-        coaches = (
+        parts.append(
             f'<div class="duo"><div class="panel"><h3 class="h3-display">Ballroom Coaches</h3>{people_list(ball, "Ballroom Coach") if ball else tba("Ballroom coaches to be announced.")}</div>'
             f'<div class="panel"><h3 class="h3-display">Latin Coaches</h3>{people_list(latin, "Latin Coach") if latin else tba("Latin coaches to be announced.")}</div></div>'
         )
+    elif not faculty:
+        parts.append(f'<div class="duo"><div class="panel {reveal()}"><h3 class="h3-display">Ballroom Coaches</h3>{tba("To be announced.")}</div><div class="panel {reveal()}"><h3 class="h3-display">Latin Coaches</h3>{tba("To be announced.")}</div></div>')
     else:
-        coaches = f'<div class="duo"><div class="panel {reveal()}"><h3 class="h3-display">Ballroom Coaches</h3>{tba("To be announced.")}</div><div class="panel {reveal()}"><h3 class="h3-display">Latin Coaches</h3>{tba("To be announced.")}</div></div>'
+        parts.append(f'<p class="small-note">Additional ballroom and Latin coaches will be announced.</p>')
+    coaches = '<div class="coach-stack">' + "".join(parts) + "</div>"
+    coach_names = ", ".join(c["name"] for c in faculty + ball + latin) or "To be announced"
     paying = any(p.get("href") for p in content["campPricing"])
     status = (
         "Camp spots are paid online: choose one day or both days in the pricing section below. Session times and coaches will be posted on this page."
@@ -837,7 +845,7 @@ def build_camp(content):
     <dl class="facts">
       <div><dt>Dates</dt><dd>{e(w1)} {e(m1)} {n1} &amp; {e(w2)} {e(m2)} {n2}, 2027</dd></div>
       <div><dt>Format</dt><dd>Private lessons, lectures (four per day) and practice rounds</dd></div>
-      <div><dt>Coaches</dt><dd>To be announced</dd></div>
+      <div><dt>Coaches</dt><dd>{e(coach_names)}</dd></div>
       <div><dt>Pricing</dt><dd>{' &middot; '.join(e(p['amount']) + ' ' + e(p.get('short') or p['title'].lower()) for p in content['campPricing']) if content['campPricing'] else 'To be announced'}</dd></div>
       <div><dt>Registration</dt><dd>{'Pay online below' if paying else 'Details to be announced'}</dd></div>
     </dl>

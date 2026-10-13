@@ -485,3 +485,5 @@ ul, ol { margin: 0; padding: 0; }
 /* The `font` shorthand resets variant settings, so keep lining numerals (dates, prices, times) everywhere. */
 *, *::before, *::after { font-variant-numeric: lining-nums !important; }
 @media (max-width: 760px) { .section-head { margin-bottom: 28px; } }
+
+.coach-stack { display: grid; gap: 56px; }
