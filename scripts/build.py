@@ -465,7 +465,7 @@ def build_home(content):
         '<p class="tba">2027 registration forms are coming soon. Registration details will appear here as soon as they are available.</p>'
     )
     camp_price_line = (
-        " &middot; ".join(e(p["amount"]) + " " + e(p["title"].lower()) for p in content["campPricing"]) + "."
+        " &middot; ".join(e(p["amount"]) + " " + e(p.get("short") or p["title"].lower()) for p in content["campPricing"]) + "."
         if content["campPricing"] else "Pricing and schedule will be announced."
     )
     body = f"""
@@ -838,7 +838,7 @@ def build_camp(content):
       <div><dt>Dates</dt><dd>{e(w1)} {e(m1)} {n1} &amp; {e(w2)} {e(m2)} {n2}, 2027</dd></div>
       <div><dt>Format</dt><dd>Private lessons, lectures (four per day) and practice rounds</dd></div>
       <div><dt>Coaches</dt><dd>To be announced</dd></div>
-      <div><dt>Pricing</dt><dd>{' &middot; '.join(e(p['amount']) + ' ' + e(p['title'].lower()) for p in content['campPricing']) if content['campPricing'] else 'To be announced'}</dd></div>
+      <div><dt>Pricing</dt><dd>{' &middot; '.join(e(p['amount']) + ' ' + e(p.get('short') or p['title'].lower()) for p in content['campPricing']) if content['campPricing'] else 'To be announced'}</dd></div>
       <div><dt>Registration</dt><dd>{'Pay online below' if paying else 'Details to be announced'}</dd></div>
     </dl>
   </div>

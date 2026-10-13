@@ -12,15 +12,24 @@
   "campPricing": [
     {
       "amount": "$200",
-      "href": "https://brilliantdancesport.squarespace.com/pay-link/3a7d90cb-4cd3-4794-ba0f-068f2a37a605",
-      "note": "Any one camp day: Friday, January 8 or Saturday, January 9",
-      "title": "Single Day"
+      "href": "https://brilliantdancesport.squarespace.com/pay-link/6ca837c3-55fa-4d93-8c77-43d7a733e6cc",
+      "note": "Training Camp Day 1 only",
+      "short": "Friday",
+      "title": "Friday, January 8"
+    },
+    {
+      "amount": "$200",
+      "href": "https://brilliantdancesport.squarespace.com/pay-link/e73a79a2-1c6f-492c-886e-6d409f3ae404",
+      "note": "Training Camp Day 2 only",
+      "short": "Saturday",
+      "title": "Saturday, January 9"
     },
     {
       "amount": "$380",
-      "href": "https://brilliantdancesport.squarespace.com/pay-link/62c22a90-d23a-44fc-a897-73e7ebffe2d5",
-      "note": "Both camp days: January 8–9, 2027",
-      "title": "Two-Day Pass"
+      "href": "https://brilliantdancesport.squarespace.com/pay-link/111a74a9-663f-4c4a-a4b2-f5db42324a13",
+      "note": "Friday, January 8 and Saturday, January 9",
+      "short": "both days",
+      "title": "Both Days"
     }
   ],
   "campSchedule": [

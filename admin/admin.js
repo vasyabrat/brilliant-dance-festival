@@ -53,7 +53,7 @@
     homeSchedule: { label: "", time: "" },
     competitionSchedule: { time: "", label: "" },
     campSchedule: { label: "", time: "" },
-    campPricing: { title: "", amount: "", note: "", href: "" },
+    campPricing: { title: "", short: "", amount: "", note: "", href: "" },
     registrationForms: { name: "", detail: "", format: "PDF", href: "" },
     prizeTables: { title: "", rows: [] },
     pillars: "",
