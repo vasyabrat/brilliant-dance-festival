@@ -165,29 +165,29 @@
     "topStudio": [
       [
         "1st Place",
-        "$800"
-      ],
-      [
-        "2nd Place",
         "$500"
       ],
       [
-        "3rd Place",
+        "2nd Place",
         "$300"
+      ],
+      [
+        "3rd Place",
+        "$200"
       ]
     ],
     "topTeacher": [
       [
         "1st Place",
-        "$1,000"
+        "$500"
       ],
       [
         "2nd Place",
-        "$750"
+        "$350"
       ],
       [
         "3rd Place",
-        "$500"
+        "$250"
       ]
     ]
   },
@@ -367,15 +367,15 @@
       "rows": [
         [
           "1st Place",
-          "$1,000"
+          "$500"
         ],
         [
           "2nd Place",
-          "$750"
+          "$350"
         ],
         [
           "3rd Place",
-          "$500"
+          "$250"
         ]
       ],
       "title": "Top Teacher"
@@ -384,44 +384,15 @@
       "rows": [
         [
           "1st Place",
-          "$150"
-        ],
-        [
-          "2nd Place",
-          "$100"
-        ],
-        [
-          "3rd Place",
-          "$80"
-        ],
-        [
-          "4th Place",
-          "$60"
-        ],
-        [
-          "5th Place",
-          "$50"
-        ],
-        [
-          "6th Place",
-          "$40"
-        ]
-      ],
-      "title": "Fordney Foundation Championship"
-    },
-    {
-      "rows": [
-        [
-          "1st Place",
-          "$800"
-        ],
-        [
-          "2nd Place",
           "$500"
         ],
         [
-          "3rd Place",
+          "2nd Place",
           "$300"
+        ],
+        [
+          "3rd Place",
+          "$200"
         ]
       ],
       "title": "Top Studio"
@@ -429,7 +400,82 @@
     {
       "rows": [
         [
-          "Youth & U21 category Champions in Latin Style",
+          "1st Place",
+          "$100"
+        ],
+        [
+          "2nd Place",
+          "$75"
+        ],
+        [
+          "3rd Place",
+          "$60"
+        ],
+        [
+          "4th Place",
+          "$50"
+        ],
+        [
+          "5th Place",
+          "$40"
+        ],
+        [
+          "6th Place",
+          "$0"
+        ]
+      ],
+      "title": "Fordney Foundation Scholarship"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$100"
+        ],
+        [
+          "2nd Place",
+          "$75"
+        ],
+        [
+          "3rd Place",
+          "$60"
+        ],
+        [
+          "4th Place",
+          "$50"
+        ],
+        [
+          "5th Place",
+          "$40"
+        ],
+        [
+          "6th Place",
+          "$0"
+        ]
+      ],
+      "title": "10 Dance Scholarship"
+    },
+    {
+      "rows": [
+        [
+          "1st Place",
+          "$100"
+        ],
+        [
+          "2nd Place",
+          "$80"
+        ],
+        [
+          "3rd Place",
+          "$50"
+        ]
+      ],
+      "title": "Show Dance"
+    },
+    {
+      "rows": [
+        [
+          "Youth & U21 and Amateur Latin Champions",
           "$750"
         ]
       ],
