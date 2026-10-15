@@ -487,3 +487,5 @@ ul, ol { margin: 0; padding: 0; }
 @media (max-width: 760px) { .section-head { margin-bottom: 28px; } }
 
 .coach-stack { display: grid; gap: 56px; }
+.coach-stack .people { grid-template-columns: repeat(auto-fill, minmax(180px, 200px)); }
+@media (max-width: 560px) { .coach-stack .people { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

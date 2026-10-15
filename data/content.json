@@ -6,7 +6,14 @@
     "vision": "We aspire to make the Brilliant Dance sport Festival the premier kids’ ballroom competition in the United States, and ultimately a global event. We aim to provide a professional-grade experience that not only motivates young dancers to keep excelling but also solidifies their place in the ballroom industry."
   },
   "campCoaches": {
-    "ballroom": [],
+    "ballroom": [
+      {
+        "name": "Marat Gimaev",
+        "photo": "assets/images/people/marat-gimaev.jpg",
+        "quote": "",
+        "role": "Ballroom Coach"
+      }
+    ],
     "faculty": [
       {
         "name": "Alexander Chesnokov",
@@ -228,7 +235,7 @@
     {
       "joint": "",
       "name": "Marat Gimaev",
-      "photo": "",
+      "photo": "assets/images/people/marat-gimaev.jpg",
       "quote": "",
       "role": "Judge"
     },
