@@ -445,9 +445,9 @@ def build_home(content):
         if hotel.get("name") else "To be announced"
     )
     if hotel.get("bookUrl"):
-        hotel_fact = f'<a href="{e(hotel["bookUrl"])}" target="_blank" rel="noopener">Book the hotel</a>'
+        hotel_fact = f'<a class="btn btn-primary btn-sm" href="{e(hotel["bookUrl"])}" target="_blank" rel="noopener">Book your stay{ARROW}</a>'
         if hotel.get("discountCode"):
-            hotel_fact += f'<br>Discount code <strong class="code">{e(hotel["discountCode"])}</strong>'
+            hotel_fact += f'<br><span class="code-note">Discount code <strong class="code">{e(hotel["discountCode"])}</strong></span>'
     elif hotel.get("name") and hotel.get("bookingStatus"):
         hotel_fact = e(hotel["bookingStatus"])
     else:
@@ -748,9 +748,9 @@ def build_hotel(content):
             if code else ""
         )
         status = (
-            f'<p>Book your room directly with Hilton. The link opens the hotel&rsquo;s booking page for the festival dates.</p>'
+            f'<p>Book your room through the Brilliant Dance Festival group page at Hilton.</p>'
             + code_html
-            + '<div class="actions">' + btn("Book the hotel", hotel["bookUrl"], "primary", True, blank) + "</div>"
+            + '<div class="actions">' + btn("Book your stay", hotel["bookUrl"], "primary", True, blank) + "</div>"
         )
     else:
         book = '<div class="actions">' + btn("Get directions", maps, "primary", True, blank) + "</div>"
