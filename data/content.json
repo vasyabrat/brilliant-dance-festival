@@ -165,15 +165,15 @@
   ],
   "hotel": {
     "address": "250 Connell Dr, Berkeley Heights, NJ 07922, United States",
-    "bookUrl": "",
-    "bookingStatus": "Group booking details for January 2027 are pending confirmation.",
+    "bookUrl": "https://www.hilton.com/en/hotels/ewrbees-embassy-suites-berkeley-heights/?arrivalDate=2027-01-07&departureDate=2027-01-11&flexibleDates=false&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&displayCurrency=USD&corporateCode=CES94R",
+    "bookingStatus": "",
+    "discountCode": "CES94R",
     "images": [
       "assets/images/venue/embassy-suites-exterior.jpg",
       "assets/images/venue/embassy-suites-building.jpg",
       "assets/images/venue/embassy-suites-lobby.jpg"
     ],
-    "name": "Embassy Suites by Hilton Berkeley Heights",
-    "pendingBookUrl": "https://www.hilton.com/en/attend-my-event/brilliant-dance-festival/"
+    "name": "Embassy Suites by Hilton Berkeley Heights"
   },
   "judgingPanel": [
     {

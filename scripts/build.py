@@ -441,10 +441,14 @@ def build_home(content):
         f'{e(hotel["name"])}<br><a href="{e(maps)}" target="_blank" rel="noopener">Directions</a> &middot; <a href="hotel.html">Venue details</a>'
         if hotel.get("name") else "To be announced"
     )
-    hotel_fact = (
-        e(hotel["bookingStatus"]) if (hotel.get("name") and not hotel.get("bookUrl") and hotel.get("bookingStatus"))
-        else ('<a href="hotel.html">Book the hotel</a>' if hotel.get("bookUrl") else "To be announced")
-    )
+    if hotel.get("bookUrl"):
+        hotel_fact = f'<a href="{e(hotel["bookUrl"])}" target="_blank" rel="noopener">Book the hotel</a>'
+        if hotel.get("discountCode"):
+            hotel_fact += f'<br>Discount code <strong class="code">{e(hotel["discountCode"])}</strong>'
+    elif hotel.get("name") and hotel.get("bookingStatus"):
+        hotel_fact = e(hotel["bookingStatus"])
+    else:
+        hotel_fact = "To be announced"
     details = f"""
 <dl class="facts">
   <div><dt>Competition</dt><dd>{e(weekday(site['eventDateISO']))}, {e(site['eventDate'])}</dd></div>
@@ -732,11 +736,21 @@ def build_hotel(content):
         for src in hotel.get("images", [])
     )
     maps = "https://www.google.com/maps/search/?api=1&query=" + quote(hotel["address"])
+    blank = ' target="_blank" rel="noopener"'
+    code = hotel.get("discountCode", "")
     if hotel.get("bookUrl"):
-        book = '<div class="actions">' + btn("Book the hotel", hotel["bookUrl"], "primary", True, ' target="_blank" rel="noopener"') + btn("Get directions", maps, "secondary", True, ' target="_blank" rel="noopener"') + "</div>"
-        status = ""
+        book = '<div class="actions">' + btn("Get directions", maps, "secondary", True, blank) + "</div>"
+        code_html = (
+            f'<p class="code-line">Use code <strong class="code">{e(code)}</strong> for the Brilliant Dance Festival discount.</p>'
+            if code else ""
+        )
+        status = (
+            f'<p>Book your room directly with Hilton. The link opens the hotel&rsquo;s booking page for the festival dates.</p>'
+            + code_html
+            + '<div class="actions">' + btn("Book the hotel", hotel["bookUrl"], "primary", True, blank) + "</div>"
+        )
     else:
-        book = '<div class="actions">' + btn("Get directions", maps, "primary", True, ' target="_blank" rel="noopener"') + "</div>"
+        book = '<div class="actions">' + btn("Get directions", maps, "primary", True, blank) + "</div>"
         status = f'<p class="tba">{e(hotel.get("bookingStatus") or "Group booking details are pending confirmation.")}</p>'
     body = page_hero("Venue &amp; hotel", e(hotel["name"]),
                      f"Training Camp {e(site['campDates'])} &middot; Competition {e(site['eventDate'])}") + section(f"""

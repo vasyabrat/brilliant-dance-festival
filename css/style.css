@@ -489,3 +489,6 @@ ul, ol { margin: 0; padding: 0; }
 .coach-stack { display: grid; gap: 56px; }
 .coach-stack .people { grid-template-columns: repeat(auto-fill, minmax(180px, 200px)); }
 @media (max-width: 560px) { .coach-stack .people { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 700; letter-spacing: 0.06em; color: var(--navy); background: var(--teal-soft); border: 1px dashed var(--teal); border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
+.code-line { font-size: 1.0625rem; margin: 6px 0 0; }
