@@ -495,19 +495,19 @@ def build_home(content):
 
 {section(f'''
 <div class="duo">
-  <article class="path path-comp {reveal()}">
-    <p class="path-kind">Competition</p>
-    <h3>{e(site['eventDate'])}</h3>
-    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through U21. Entries include solos, amateur couples and teacher/student.</p>
-    {btn('Competition overview', 'competition.html', 'secondary')}
-  </article>
   <article class="path path-camp {reveal()}">
     <p class="path-kind">Training Camp</p>
     <h3>{e(site['campDates'])}</h3>
     <p>Two days of training ahead of the competition: private lessons, lectures and practice rounds. {camp_price_line}</p>
     {btn('Camp information', 'camp.html', 'secondary')}
   </article>
-</div>''', "", section_head("The weekend", "Two events, one festival", "Compete on Sunday, or train with coaches on Friday and Saturday. Dancers can take part in either or both.", "overview-title"), "overview-title")}
+  <article class="path path-comp {reveal()}">
+    <p class="path-kind">Competition</p>
+    <h3>{e(site['eventDate'])}</h3>
+    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through U21. Entries include solos, amateur couples and teacher/student.</p>
+    {btn('Competition overview', 'competition.html', 'secondary')}
+  </article>
+</div>''', "", section_head("The weekend", "Two events, one festival", "Train with coaches on Friday and Saturday, then compete on Sunday. Dancers can take part in either or both.", "overview-title"), "overview-title")}
 
 {section(f'''
 <div class="split-text">
