@@ -438,7 +438,7 @@ def build_home(content):
     n_judges = len(content["judgingPanel"])
     n_off = len(content["officials"])
     judges_fact = (
-        f'<a href="judges.html">{n_judges} judges and {n_off} officials</a>' if n_judges else "To be announced"
+        '<a href="judges.html">Meet the judges &amp; officials</a>' if n_judges else "To be announced"
     )
     venue_fact = (
         f'{e(hotel["name"])}<br><a href="{e(maps)}" target="_blank" rel="noopener">Directions</a> &middot; <a href="hotel.html">Venue details</a>'
@@ -619,7 +619,7 @@ def build_competition(content):
 <ul class="link-rows">
   <li class="{reveal()}"><a href="registration.html"><span><strong>Registration</strong><em>Forms, submission and payment</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="schedule.html"><span><strong>Schedule</strong><em>Camp days and competition day</em></span>{ARROW}</a></li>
-  <li class="{reveal()}"><a href="judges.html"><span><strong>Judges &amp; Officials</strong><em>{n_j} judges &middot; {n_o} officials</em></span>{ARROW}</a></li>
+  <li class="{reveal()}"><a href="judges.html"><span><strong>Judges &amp; Officials</strong><em>Meet the judging panel and officials</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="prizes.html"><span><strong>Prizes</strong><em>{e(prize_names)}</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="partner-search.html"><span><strong>Partner Search</strong><em>Dancers looking for a Latin partner</em></span>{ARROW}</a></li>
 </ul>
@@ -675,7 +675,7 @@ def build_judges(content):
     o_html = people_list(officials) if officials else tba("Officials will be announced.")
     count = len(judges)
     body = page_hero(e(site["eventDate"]), "Judges &amp; Officials",
-                     f"{count} judges and {len(officials)} officials for the {e(site['eventDate'])} competition.") \
+                     f"The judging panel and officials for the {e(site['eventDate'])} competition.") \
         + section(f"""
 <div class="roster-block">
   <h2 class="h3-display {reveal()}">Judges</h2>
