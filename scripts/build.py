@@ -834,8 +834,8 @@ def build_camp(content):
         parts.append(f'<div class="roster-block"><h3 class="h3-display {reveal()}">Camp coaches</h3>{people_list(faculty, "Camp Coach")}</div>')
     if ball or latin:
         parts.append(
-            f'<div class="duo"><div class="panel"><h3 class="h3-display">Ballroom Coaches</h3>{people_list(ball, "Ballroom Coach") if ball else tba("Ballroom coaches to be announced.")}</div>'
-            f'<div class="panel"><h3 class="h3-display">Latin Coaches</h3>{people_list(latin, "Latin Coach") if latin else tba("Latin coaches to be announced.")}</div></div>'
+            f'<div class="roster-block"><h3 class="h3-display {reveal()}">Ballroom Coaches</h3>{people_list(ball, "Ballroom Coach") if ball else tba("Ballroom coaches to be announced.")}</div>'
+            f'<div class="roster-block"><h3 class="h3-display {reveal()}">Latin Coaches</h3>{people_list(latin, "Latin Coach") if latin else tba("Latin coaches to be announced.")}</div>'
         )
     elif not faculty:
         parts.append(f'<div class="duo"><div class="panel {reveal()}"><h3 class="h3-display">Ballroom Coaches</h3>{tba("To be announced.")}</div><div class="panel {reveal()}"><h3 class="h3-display">Latin Coaches</h3>{tba("To be announced.")}</div></div>')

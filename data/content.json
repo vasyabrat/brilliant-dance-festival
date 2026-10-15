@@ -18,6 +18,12 @@
         "photo": "assets/images/people/katusha-spasitel.jpg",
         "quote": "",
         "role": "Ballroom Coach"
+      },
+      {
+        "name": "Artem Kuklin",
+        "photo": "assets/images/people/artem.jpg",
+        "quote": "",
+        "role": "Ballroom Coach"
       }
     ],
     "faculty": [],
@@ -37,6 +43,24 @@
       {
         "name": "Alexander Chesnokov",
         "photo": "assets/images/people/alexander-chesnokov.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      },
+      {
+        "name": "Maria Manusova",
+        "photo": "assets/images/people/maria.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      },
+      {
+        "name": "Darren Hammond",
+        "photo": "assets/images/people/darren-hammond.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      },
+      {
+        "name": "Marina Steshenko",
+        "photo": "assets/images/people/marina-steshenko.jpg",
         "quote": "",
         "role": "Latin Coach"
       }
