@@ -111,13 +111,6 @@
   "homeFeaturedJudges": [
     {
       "joint": "",
-      "name": "Darina Jeleva",
-      "photo": "assets/images/people/darina.jpg",
-      "quote": "",
-      "role": "Chairman of Judges"
-    },
-    {
-      "joint": "",
       "name": "Sasha Nissengolts",
       "photo": "assets/images/people/sasha.jpg",
       "quote": "",
@@ -134,6 +127,13 @@
       "joint": "",
       "name": "Jason Dai",
       "photo": "assets/images/people/jason.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Artem Kuklin",
+      "photo": "assets/images/people/artem.jpg",
       "quote": "",
       "role": "Judge"
     }
@@ -195,13 +195,6 @@
     "name": "Embassy Suites by Hilton Berkeley Heights"
   },
   "judgingPanel": [
-    {
-      "joint": "",
-      "name": "Darina Jeleva",
-      "photo": "assets/images/people/darina.jpg",
-      "quote": "",
-      "role": "Chairman of Judges"
-    },
     {
       "joint": "",
       "name": "Sasha Nissengolts",
@@ -289,6 +282,11 @@
   ],
   "missionText": "Brilliant Dance Festival recognizes young ballroom dancer talent with professionalism and respect, positioning the event as a leading competition for aspiring professionals.",
   "officials": [
+    {
+      "name": "Darina Jeleva",
+      "photo": "assets/images/people/darina.jpg",
+      "role": "Chairman of Judges"
+    },
     {
       "name": "Renee Bennet",
       "photo": "assets/images/people/renee-bennet.jpg",
