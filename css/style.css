@@ -439,7 +439,7 @@ ul, ol { margin: 0; padding: 0; }
 .people { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 36px 28px; }
 @media (max-width: 560px) { .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; } .person h3 { font-size: 1.15rem; } .person .role { font-size: 0.75rem; } .frame-initials span { font-size: 2.6rem; } }
 .person .frame { aspect-ratio: 5 / 6; border-radius: var(--radius); overflow: hidden; background: var(--bg-alt); margin-bottom: 14px; }
-.person .frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; margin: 0; aspect-ratio: auto; border-radius: 0; }
+.person .frame img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; margin: 0; aspect-ratio: auto; border-radius: 0; filter: none; transform: none; }
 .frame-initials { display: flex; align-items: center; justify-content: center; background: var(--teal-soft); border: 1px solid #c9dfe1; }
 .frame-initials span { font-family: var(--font-display); font-size: 3.6rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; }
 
@@ -492,3 +492,4 @@ ul, ol { margin: 0; padding: 0; }
 
 .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 700; letter-spacing: 0.06em; color: var(--navy); background: var(--teal-soft); border: 1px dashed var(--teal); border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
 .code-line { font-size: 1.0625rem; margin: 6px 0 0; }
+.section.alt .person .frame { background: #e6e0d3; }

@@ -9,19 +9,19 @@
     "ballroom": [
       {
         "name": "Marat Gimaev",
-        "photo": "assets/images/people/marat-gimaev.jpg",
+        "photo": "assets/images/people/marat-gimaev.png",
         "quote": "",
         "role": "Ballroom Coach"
       },
       {
         "name": "Katusha Spasitel",
-        "photo": "assets/images/people/katusha-spasitel.jpg",
+        "photo": "assets/images/people/katusha-spasitel.png",
         "quote": "",
         "role": "Ballroom Coach"
       },
       {
         "name": "Artem Kuklin",
-        "photo": "assets/images/people/artem.jpg",
+        "photo": "assets/images/people/artem-kuklin.png",
         "quote": "",
         "role": "Ballroom Coach"
       }
@@ -30,37 +30,37 @@
     "latin": [
       {
         "name": "Riccardo Cocchi",
-        "photo": "assets/images/people/riccardo-cocchi.jpg",
+        "photo": "assets/images/people/riccardo-cocchi.png",
         "quote": "",
         "role": "Latin Coach"
       },
       {
         "name": "Yulia Zagoruychenko",
-        "photo": "assets/images/people/yulia-zagoruychenko.jpg",
+        "photo": "assets/images/people/yulia-zagoruychenko.png",
         "quote": "",
         "role": "Latin Coach"
       },
       {
         "name": "Alexander Chesnokov",
-        "photo": "assets/images/people/alexander-chesnokov.jpg",
+        "photo": "assets/images/people/alexander-chesnokov.png",
         "quote": "",
         "role": "Latin Coach"
       },
       {
         "name": "Maria Manusova",
-        "photo": "assets/images/people/maria.jpg",
+        "photo": "assets/images/people/maria-manusova.png",
         "quote": "",
         "role": "Latin Coach"
       },
       {
         "name": "Darren Hammond",
-        "photo": "assets/images/people/darren-hammond.jpg",
+        "photo": "assets/images/people/darren-hammond.png",
         "quote": "",
         "role": "Latin Coach"
       },
       {
         "name": "Marina Steshenko",
-        "photo": "assets/images/people/marina-steshenko.jpg",
+        "photo": "assets/images/people/marina-steshenko.png",
         "quote": "",
         "role": "Latin Coach"
       }
@@ -135,28 +135,28 @@
     {
       "joint": "",
       "name": "Sasha Nissengolts",
-      "photo": "assets/images/people/sasha.jpg",
+      "photo": "assets/images/people/sasha-nissengolts.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Eric Groysman",
-      "photo": "assets/images/people/eric.jpg",
+      "photo": "assets/images/people/eric-groysman.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Jason Dai",
-      "photo": "assets/images/people/jason.jpg",
+      "photo": "assets/images/people/jason-dai.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Artem Kuklin",
-      "photo": "assets/images/people/artem.jpg",
+      "photo": "assets/images/people/artem-kuklin.png",
       "quote": "",
       "role": "Judge"
     }
@@ -221,84 +221,84 @@
     {
       "joint": "",
       "name": "Sasha Nissengolts",
-      "photo": "assets/images/people/sasha.jpg",
+      "photo": "assets/images/people/sasha-nissengolts.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Eric Groysman",
-      "photo": "assets/images/people/eric.jpg",
+      "photo": "assets/images/people/eric-groysman.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Jason Dai",
-      "photo": "assets/images/people/jason.jpg",
+      "photo": "assets/images/people/jason-dai.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Artem Kuklin",
-      "photo": "assets/images/people/artem.jpg",
+      "photo": "assets/images/people/artem-kuklin.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Darren Hammond",
-      "photo": "assets/images/people/darren-hammond.jpg",
+      "photo": "assets/images/people/darren-hammond.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Marina Steshenko",
-      "photo": "assets/images/people/marina-steshenko.jpg",
+      "photo": "assets/images/people/marina-steshenko.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Maria Manusova",
-      "photo": "assets/images/people/maria.jpg",
+      "photo": "assets/images/people/maria-manusova.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Marat Gimaev",
-      "photo": "assets/images/people/marat-gimaev.jpg",
+      "photo": "assets/images/people/marat-gimaev.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Alexander Chesnokov",
-      "photo": "assets/images/people/alexander-chesnokov.jpg",
+      "photo": "assets/images/people/alexander-chesnokov.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Katusha Spasitel",
-      "photo": "assets/images/people/katusha-spasitel.jpg",
+      "photo": "assets/images/people/katusha-spasitel.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Riccardo Cocchi",
-      "photo": "assets/images/people/riccardo-cocchi.jpg",
+      "photo": "assets/images/people/riccardo-cocchi.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
       "name": "Yulia Zagoruychenko",
-      "photo": "assets/images/people/yulia-zagoruychenko.jpg",
+      "photo": "assets/images/people/yulia-zagoruychenko.png",
       "quote": "",
       "role": "Judge"
     }
@@ -307,17 +307,17 @@
   "officials": [
     {
       "name": "Darina Jeleva",
-      "photo": "assets/images/people/darina.jpg",
+      "photo": "assets/images/people/darina-jeleva.png",
       "role": "Chairman of Judges"
     },
     {
       "name": "Renee Bennet",
-      "photo": "assets/images/people/renee-bennet.jpg",
+      "photo": "assets/images/people/renee-bennet.png",
       "role": "Scrutineer"
     },
     {
       "name": "Marielle Pabon",
-      "photo": "assets/images/people/marielle.jpg",
+      "photo": "assets/images/people/marielle-pabon.png",
       "role": "Registrar"
     }
   ],
