@@ -28,7 +28,20 @@
         "role": "Camp Coach"
       }
     ],
-    "latin": []
+    "latin": [
+      {
+        "name": "Riccardo Cocchi",
+        "photo": "assets/images/people/riccardo-cocchi.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      },
+      {
+        "name": "Yulia Zagoruychenko",
+        "photo": "assets/images/people/yulia-zagoruychenko.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      }
+    ]
   },
   "campPricing": [
     {
@@ -256,6 +269,20 @@
       "joint": "",
       "name": "Katusha Spasitel",
       "photo": "assets/images/people/katusha-spasitel.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Riccardo Cocchi",
+      "photo": "assets/images/people/riccardo-cocchi.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Yulia Zagoruychenko",
+      "photo": "assets/images/people/yulia-zagoruychenko.jpg",
       "quote": "",
       "role": "Judge"
     }
