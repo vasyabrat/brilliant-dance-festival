@@ -20,14 +20,7 @@
         "role": "Ballroom Coach"
       }
     ],
-    "faculty": [
-      {
-        "name": "Alexander Chesnokov",
-        "photo": "assets/images/people/alexander-chesnokov.jpg",
-        "quote": "",
-        "role": "Camp Coach"
-      }
-    ],
+    "faculty": [],
     "latin": [
       {
         "name": "Riccardo Cocchi",
@@ -38,6 +31,12 @@
       {
         "name": "Yulia Zagoruychenko",
         "photo": "assets/images/people/yulia-zagoruychenko.jpg",
+        "quote": "",
+        "role": "Latin Coach"
+      },
+      {
+        "name": "Alexander Chesnokov",
+        "photo": "assets/images/people/alexander-chesnokov.jpg",
         "quote": "",
         "role": "Latin Coach"
       }
