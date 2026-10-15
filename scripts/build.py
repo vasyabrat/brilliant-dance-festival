@@ -748,7 +748,7 @@ def build_hotel(content):
             if code else ""
         )
         status = (
-            f'<p>Book your room through the Brilliant Dance Festival group page at Hilton.</p>'
+            f'<p>Book your room through the Brilliant Dance Festival group page at Hilton. The festival group rate is applied automatically.</p>'
             + code_html
             + '<div class="actions">' + btn("Book your stay", hotel["bookUrl"], "primary", True, blank) + "</div>"
         )
