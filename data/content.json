@@ -12,6 +12,12 @@
         "photo": "assets/images/people/marat-gimaev.jpg",
         "quote": "",
         "role": "Ballroom Coach"
+      },
+      {
+        "name": "Katusha Spasitel",
+        "photo": "assets/images/people/katusha-spasitel.jpg",
+        "quote": "",
+        "role": "Ballroom Coach"
       }
     ],
     "faculty": [
@@ -243,6 +249,13 @@
       "joint": "",
       "name": "Alexander Chesnokov",
       "photo": "assets/images/people/alexander-chesnokov.jpg",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Katusha Spasitel",
+      "photo": "assets/images/people/katusha-spasitel.jpg",
       "quote": "",
       "role": "Judge"
     }
