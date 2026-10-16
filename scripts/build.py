@@ -42,7 +42,7 @@ NAV = [
     ("Event Information", "", [
         ("Registration", "registration.html"),
         ("Hotel", "hotel.html"),
-        ("Vendors & Sponsors", "vendors.html"),
+        ("Vendors", "vendors.html"),
     ]),
     ("About", "about.html", []),
     ("Contact", "contact.html", []),
@@ -320,7 +320,7 @@ def footer_html(content):
           <li><a href="camp.html">Training Camp</a></li>
           <li><a href="judges.html">Judges &amp; Officials</a></li>
           <li><a href="hotel.html">Hotel</a></li>
-          <li><a href="vendors.html">Vendors &amp; Sponsors</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
         </ul>
       </nav>
       <div>
@@ -507,7 +507,7 @@ def build_home(content):
   <article class="path path-comp {reveal()}">
     <p class="path-kind">Competition</p>
     <h3>{e(site['eventDate'])}</h3>
-    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through U21. Entries include solos, amateur couples and teacher/student.</p>
+    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through Amateur. Entries include solos, amateur couples and teacher/student.</p>
     {btn('Competition overview', 'competition.html', 'secondary')}
   </article>
 </div>''', "", section_head("The weekend", "Two events, one festival", "Train with coaches on Friday and Saturday, then compete on Sunday. Dancers can take part in either or both.", "overview-title"), "overview-title")}
@@ -603,7 +603,7 @@ def build_competition(content):
       <div><dt>Date</dt><dd>{e(weekday(site['eventDateISO']))}, {e(site['eventDate'])}</dd></div>
       <div><dt>Venue</dt><dd>{e(hotel['name']) if hotel.get('name') else 'To be announced'}{' &middot; <a href="hotel.html">Venue details</a>' if hotel.get('name') else ''}</dd></div>
       <div><dt>Styles</dt><dd>International Ballroom, International Latin, American Smooth, American Rhythm</dd></div>
-      <div><dt>Age categories</dt><dd>Minis (3&ndash;5), TB (6&ndash;7), PT1 (8&ndash;9), PT2 (10&ndash;11), J1 (12&ndash;13), J2 (14&ndash;15), Youth (16&ndash;18), U21 (19&ndash;20)</dd></div>
+      <div><dt>Age categories</dt><dd>Minis (3&ndash;5), TB (6&ndash;7), PT1 (8&ndash;9), PT2 (10&ndash;11), J1 (12&ndash;13), J2 (14&ndash;15), Youth (16&ndash;18), U21 (19&ndash;20), Amateur</dd></div>
       <div><dt>Rules</dt><dd>NDCA rules and regulations apply</dd></div>
     </dl>
   </div>
@@ -723,12 +723,12 @@ def build_vendors(content):
     vendors = "".join(vendor_card(v) for v in content["vendors"])
     sponsors = "".join(vendor_card(s) for s in content["sponsors"])
     v_html = f'<ul class="vendor-grid">{vendors}</ul>' if vendors else tba("Vendors will be announced.")
-    s_html = f'<ul class="vendor-grid">{sponsors}</ul>' if sponsors else tba("Sponsors will be announced.")
-    body = page_hero(e(site["eventDate"]), "Vendors &amp; Sponsors", f"Businesses and service providers supporting {e(site['name'])}.") \
+    s_html = f'<ul class="vendor-grid">{sponsors}</ul>' if sponsors else ""
+    body = page_hero(e(site["eventDate"]), "Vendors", f"Businesses and service providers at {e(site['name'])}.") \
         + section(v_html, "", section_head("Vendors", "Beauty, apparel, photography &amp; video", "", "vendors-title", "left"), "vendors-title") \
-        + section(s_html, "alt", section_head("Sponsors", "Thank you to our sponsors", "", "sponsors-title", "left"), "sponsors-title") \
-        + section('<p class="small-note center">Interested in being a vendor or sponsor? <a href="contact.html">Get in touch</a>.</p>', "")
-    page("vendors.html", content, "Vendors & Sponsors", f"Vendors and sponsors of {site['name']} 2027.", "vendors.html", body)
+        + (section(s_html, "alt", section_head("Sponsors", "Thank you to our sponsors", "", "sponsors-title", "left"), "sponsors-title") if s_html else "") \
+        + section('<p class="small-note center">Interested in being a vendor? <a href="contact.html">Get in touch</a>.</p>', "")
+    page("vendors.html", content, "Vendors", f"Vendors at {site['name']} 2027.", "vendors.html", body)
 
 
 def build_hotel(content):
