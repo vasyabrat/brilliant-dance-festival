@@ -621,6 +621,7 @@ def build_competition(content):
   <li class="{reveal()}"><a href="schedule.html"><span><strong>Schedule</strong><em>Camp days and competition day</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="judges.html"><span><strong>Judges &amp; Officials</strong><em>Meet the judging panel and officials</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="prizes.html"><span><strong>Prizes</strong><em>{e(prize_names)}</em></span>{ARROW}</a></li>
+  <li class="{reveal()}"><a href="registration.html#coach-pass-title"><span><strong>Coaches Pass</strong><em>Free ballroom and on-deck access for coaches</em></span>{ARROW}</a></li>
   <li class="{reveal()}"><a href="partner-search.html"><span><strong>Partner Search</strong><em>Dancers looking for a Latin partner</em></span>{ARROW}</a></li>
 </ul>
 <div class="resource-row {reveal()}"><h3 class="h3-display">Results</h3>{resource_status(site)}</div>""", "", section_head("Explore", "More about the competition", "", "explore-title", "left"), "explore-title")
@@ -968,7 +969,25 @@ def build_registration(content):
     camp_note = f"""
 <div class="notice left {reveal()}"><h2 class="h3-display">Training Camp registration</h2>
 {camp_body}</div>"""
+    cp = content.get("coachingPass") or {}
+    coach_html = ""
+    if cp.get("href"):
+        coach_html = section(f"""
+<div class="coach-pass {reveal()}">
+  <div>
+    <p class="eyebrow">For coaches &middot; Free</p>
+    <h2 id="coach-pass-title">{e(cp.get("title", "Coaches Pass"))}</h2>
+    <p>{e(cp.get("summary", ""))}</p>
+  </div>
+  <ol class="steps">
+    <li><h3>Download the form</h3><p>Coaches Pass Registration Form (PDF).</p></li>
+    <li><h3>Fill it in</h3><p>Studio or coach, address, email, phone number, and a list of your students.</p></li>
+    <li><h3>Email it in</h3><p>Send the completed form to <a href="mailto:{e(cp.get("submitTo", ""))}">{e(cp.get("submitTo", ""))}</a>. Your pass is given to you at registration.</p></li>
+  </ol>
+  <div class="actions"><a class="btn btn-primary" href="{e(cp["href"])}" target="_blank" rel="noopener" download>Download Coaches Pass form{ARROW}</a></div>
+</div>""", "", "", "coach-pass-title")
     body = page_hero(e(site["eventDate"]), "Competition Registration", lede) + section(steps) \
+        + coach_html \
         + section(camp_note + f'<p class="small-note center">Please review the <a href="rules-regulations.html">Rules &amp; Regulations</a> before you enter.</p>', "alt")
     page("registration.html", content, "Registration", f"Register for {site['name']} {site['eventDate']}: choose your category, complete the form, and follow the submission and payment instructions.", "registration.html", body)
 

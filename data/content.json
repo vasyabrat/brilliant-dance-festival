@@ -103,6 +103,12 @@
       "time": "7:00 – 9:00 PM"
     }
   ],
+  "coachingPass": {
+    "href": "assets/forms/coaching-pass.pdf",
+    "submitTo": "Dance@brilliantdancefestival.com",
+    "summary": "A FREE Coaching Pass will be given to you at registration. You may enter into the Ballroom and the On Deck Area with this coaching pass. Additionally, a snack and beverage area will be set up for competition officials and coaches. You are welcome to the snacks and refreshments throughout the day.",
+    "title": "Coaches Pass"
+  },
   "competitionSchedule": [
     {
       "label": "Ballroom: Mixed Amateur, Solo, and awards",

@@ -35,6 +35,7 @@
     { key: "hotel", title: "Hotel", desc: "" },
     { key: "contact", title: "Contact Info", desc: "" },
     { key: "registrationForms", title: "Registration Forms", desc: "Downloadable PDF links on the Registration page." },
+    { key: "coachingPass", title: "Coaches Pass", desc: "Free coaches pass form shown on the Registration page." },
     { key: "registrationPayment", title: "Registration Payment Info", desc: "" },
     { key: "rules", title: "Rules & Regulations", desc: "One entry per numbered rule." },
     { key: "_raw", title: "Advanced: Raw JSON", desc: "Direct access to the entire content file, for anything not covered above." },
