@@ -507,7 +507,7 @@ def build_home(content):
   <article class="path path-comp {reveal()}">
     <p class="path-kind">Competition</p>
     <h3>{e(site['eventDate'])}</h3>
-    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through Amateur. Entries include solos, amateur couples and teacher/student.</p>
+    <p>A one-day competition in International Ballroom, International Latin, American Smooth and American Rhythm, for dancers from Minis through Amateur. Entries include solos, amateur couples, teacher/student and exhibition show dance.</p>
     {btn('Competition overview', 'competition.html', 'secondary')}
   </article>
 </div>''', "", section_head("The weekend", "Two events, one festival", "Train with coaches on Friday and Saturday, then compete on Sunday. Dancers can take part in either or both.", "overview-title"), "overview-title")}
@@ -603,7 +603,7 @@ def build_competition(content):
       <div><dt>Date</dt><dd>{e(weekday(site['eventDateISO']))}, {e(site['eventDate'])}</dd></div>
       <div><dt>Venue</dt><dd>{e(hotel['name']) if hotel.get('name') else 'To be announced'}{' &middot; <a href="hotel.html">Venue details</a>' if hotel.get('name') else ''}</dd></div>
       <div><dt>Styles</dt><dd>International Ballroom, International Latin, American Smooth, American Rhythm</dd></div>
-      <div><dt>Age categories</dt><dd>Minis (3&ndash;5), TB (6&ndash;7), PT1 (8&ndash;9), PT2 (10&ndash;11), J1 (12&ndash;13), J2 (14&ndash;15), Youth (16&ndash;18), U21 (19&ndash;20), Amateur</dd></div>
+      <div><dt>Age categories</dt><dd>Minis (3&ndash;5), TB (6&ndash;7), PT1 (8&ndash;9), PT2 (10&ndash;11), J1 (12&ndash;13), J2 (14&ndash;15), Youth (16&ndash;18), U21 (19&ndash;20), Adult A (19+), Senior S1 (35+), S2 (45+), S3 (55+), S4 (65+)</dd></div>
       <div><dt>Rules</dt><dd>NDCA rules and regulations apply</dd></div>
     </dl>
   </div>

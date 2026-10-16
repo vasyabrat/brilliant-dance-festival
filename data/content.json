@@ -500,13 +500,25 @@
       "detail": "Minis · TB · PT · Junior · Youth · U21",
       "format": "PDF",
       "href": "assets/forms/amateur-couples.pdf",
-      "name": "Amateur Couples"
+      "name": "Amateur Couples (Minis–U21)"
+    },
+    {
+      "detail": "U21 · Adult (19+) · Senior S1–S4 (35+ to 65+)",
+      "format": "PDF",
+      "href": "assets/forms/amateur-couples-u21-adult-senior.pdf",
+      "name": "Amateur Couples (U21, Adult & Senior)"
     },
     {
       "detail": "Minis · TB · PT · Junior · Youth · U21",
       "format": "PDF",
       "href": "assets/forms/teacher-student.pdf",
       "name": "Teacher/Student"
+    },
+    {
+      "detail": "All ages · Pro/Am, Mixed Amateur or Amateur/Amateur",
+      "format": "PDF",
+      "href": "assets/forms/show-dance.pdf",
+      "name": "Exhibition Show Dance"
     }
   ],
   "registrationPayment": {
