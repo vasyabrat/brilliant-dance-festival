@@ -146,29 +146,29 @@
   "homeFeaturedJudges": [
     {
       "joint": "",
-      "name": "Sasha Nissengolts",
-      "photo": "assets/images/people/sasha-nissengolts-v2.png",
+      "name": "Riccardo Cocchi",
+      "photo": "assets/images/people/riccardo-cocchi-v2.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
-      "name": "Eric Groysman",
-      "photo": "assets/images/people/eric-groysman.png",
+      "name": "Katusha Spasitel",
+      "photo": "assets/images/people/katusha-spasitel-v2.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
-      "name": "Jason Dai",
-      "photo": "assets/images/people/jason-dai.png",
+      "name": "Andrej Skufca",
+      "photo": "assets/images/people/andrej-skufca.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
-      "name": "Artem Kuklin",
-      "photo": "assets/images/people/artem-kuklin-v2.png",
+      "name": "Yulia Zagoruychenko",
+      "photo": "assets/images/people/yulia-zagoruychenko-v2.png",
       "quote": "",
       "role": "Judge"
     }
@@ -232,64 +232,8 @@
   "judgingPanel": [
     {
       "joint": "",
-      "name": "Sasha Nissengolts",
-      "photo": "assets/images/people/sasha-nissengolts-v2.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Eric Groysman",
-      "photo": "assets/images/people/eric-groysman.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Jason Dai",
-      "photo": "assets/images/people/jason-dai.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Artem Kuklin",
-      "photo": "assets/images/people/artem-kuklin-v2.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Darren Hammond",
-      "photo": "assets/images/people/darren-hammond-v2.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Marina Steshenko",
-      "photo": "assets/images/people/marina-steshenko-v2.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Maria Manusova",
-      "photo": "assets/images/people/maria-manusova-v2.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Marat Gimaev",
-      "photo": "assets/images/people/marat-gimaev.png",
-      "quote": "",
-      "role": "Judge"
-    },
-    {
-      "joint": "",
-      "name": "Alexander Chesnokov",
-      "photo": "assets/images/people/alexander-chesnokov-v2.png",
+      "name": "Riccardo Cocchi",
+      "photo": "assets/images/people/riccardo-cocchi-v2.png",
       "quote": "",
       "role": "Judge"
     },
@@ -302,8 +246,8 @@
     },
     {
       "joint": "",
-      "name": "Riccardo Cocchi",
-      "photo": "assets/images/people/riccardo-cocchi-v2.png",
+      "name": "Andrej Skufca",
+      "photo": "assets/images/people/andrej-skufca.png",
       "quote": "",
       "role": "Judge"
     },
@@ -316,8 +260,36 @@
     },
     {
       "joint": "",
-      "name": "Daniil Dobrovolskyi",
-      "photo": "assets/images/people/daniil-dobrovolskyi-v2.png",
+      "name": "Marat Gimaev",
+      "photo": "assets/images/people/marat-gimaev.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Marina Steshenko",
+      "photo": "assets/images/people/marina-steshenko-v2.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Alexander Chesnokov",
+      "photo": "assets/images/people/alexander-chesnokov-v2.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Maria Manusova",
+      "photo": "assets/images/people/maria-manusova-v2.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Darren Hammond",
+      "photo": "assets/images/people/darren-hammond-v2.png",
       "quote": "",
       "role": "Judge"
     },
@@ -337,15 +309,43 @@
     },
     {
       "joint": "",
-      "name": "Sasha Kalenyuk",
-      "photo": "assets/images/people/sasha-kalenyuk-v2.png",
+      "name": "Sasha Nissengolts",
+      "photo": "assets/images/people/sasha-nissengolts-v2.png",
       "quote": "",
       "role": "Judge"
     },
     {
       "joint": "",
-      "name": "Andrej Skufca",
-      "photo": "assets/images/people/andrej-skufca.png",
+      "name": "Artem Kuklin",
+      "photo": "assets/images/people/artem-kuklin-v2.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Eric Groysman",
+      "photo": "assets/images/people/eric-groysman.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Jason Dai",
+      "photo": "assets/images/people/jason-dai.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Daniil Dobrovolskyi",
+      "photo": "assets/images/people/daniil-dobrovolskyi-v2.png",
+      "quote": "",
+      "role": "Judge"
+    },
+    {
+      "joint": "",
+      "name": "Sasha Kalenyuk",
+      "photo": "assets/images/people/sasha-kalenyuk-v2.png",
       "quote": "",
       "role": "Judge"
     }
